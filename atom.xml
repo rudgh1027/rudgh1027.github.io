@@ -10,9 +10,9 @@
       <item>
         <title>Deploy Dotnet MVC web</title>
         
-          <description>&lt;h1 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h1&gt;
-&lt;h2 id=&quot;install-dotnet-core-sdk&quot;&gt;Install Dotnet core SDK&lt;/h2&gt;
-&lt;p&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current
+          <description>&lt;h2 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h2&gt;
+&lt;h3 id=&quot;1-install-dotnet-core-sdk&quot;&gt;1. Install Dotnet core SDK&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current&quot;&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current&lt;/a&gt;
 &lt;br /&gt;Find OS Type and version matches your environment.
 &lt;br /&gt;In my case, using ubuntu 18.x version&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
@@ -33,7 +33,7 @@ sudo dpkg -i packages-microsoft-prod.deb
       <item>
         <title>CICD pipeline for container based workloads</title>
         
-          <description>&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+          <description>&lt;h2 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;br /&gt;
 &lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
 
@@ -50,7 +50,7 @@ sudo dpkg -i packages-microsoft-prod.deb
       <item>
         <title>Queue Based Load Leveling</title>
         
-          <description>&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+          <description>&lt;h2 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 
 </description>
         

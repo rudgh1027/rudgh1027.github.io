@@ -189,10 +189,10 @@ into the {body} of the default.hbs template -->
 <p>I'll implements this architecture using <b>azure table storage</b> as datastore and <b>console application program</b> as web app.</p>
 <p>I recommand you to follow everything in previous practice. <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
 
-<h1 id="procedure">Procedure</h1>
+<h2 id="procedure">Procedure</h2>
 <p>If you complete all procedure in privious practice, comtinue following procedure.</p>
 
-<h2 id="1-get-source-from-github">1. Get source from github</h2>
+<h3 id="1-get-source-from-github">1. Get source from github</h3>
 <pre><code>
 git init source           #source can be replaced with other directory name you want
 cd source
@@ -204,14 +204,14 @@ cd azure/002.queueTriggeredFunction_tableInsert/
 
 </code></pre>
 
-<h2 id="2-editting-parameter-name">2. Editting Parameter Name</h2>
+<h3 id="2-editting-parameter-name">2. Editting Parameter Name</h3>
 <pre><code>
 ## complete names of resources
 vi exported.dat
 
 </code></pre>
 
-<h2 id="3-deploy-service-bus-queue-and-azure-function-app">3. Deploy Service Bus Queue and Azure Function App</h2>
+<h3 id="3-deploy-service-bus-queue-and-azure-function-app">3. Deploy Service Bus Queue and Azure Function App</h3>
 <p>Just run</p>
 <pre><code>
 ## deploy queue
@@ -221,7 +221,7 @@ vi exported.dat
 
 </code></pre>
 
-<h2 id="4-make-project">4. Make Project</h2>
+<h3 id="4-make-project">4. Make Project</h3>
 <pre><code>
 ./makeProj.sh
 ## Select a worker runtime:
@@ -252,7 +252,7 @@ az storage table create --name {yourTableStorageName} --account-name {yourStorag
 
 </code></pre>
 
-<h2 id="6-editting-functionappnamecs-source---2">6. Editting {FunctionAppName}.cs Source   <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h2>
+<h3 id="6-editting-functionappnamecs-source---2">6. Editting {FunctionAppName}.cs Source   <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h3>
 
 <p>Open ~/source/azure/002.queueTriggeredFunction_tableInsert/(projectname).cs</p>
 <p>Now our codes are</p>
@@ -310,7 +310,7 @@ namespace funcgkim0012
 
 </code></pre>
 
-<h2 id="7-import-nuget-package">7. Import Nuget Package</h2>
+<h3 id="7-import-nuget-package">7. Import Nuget Package</h3>
 <pre><code>
 ## In your azure cloud shell, cd ..../{yourfunctionapp}/
 ## Import package of webjobs storage extension
@@ -319,7 +319,7 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage --version 3.0.4
 dotnet add package Newtonsoft.Json --version 11.0.2
 
 </code></pre>
-<h2 id="8-local-build">8. Local Build</h2>
+<h3 id="8-local-build">8. Local Build</h3>
 <pre><code>
 ## bash
 func start --build
@@ -337,7 +337,7 @@ Parameter name: provider
 <p>Then you have to use other extension version of azuer Storage. This error was occured because visual studio code and package version didn't match.</p>
 <p>I recommand 3.0.4 version of <b>Microsoft.Azure.WebJobs.Extensions.Storage</b></p>
 
-<h3 id="81-test_1">8.1 Test_1</h3>
+<h4 id="1-test-1">1) Test 1</h4>
 <p>Open another tab at your browser and open additional terminal in azure. And then type..</p>
 <pre><code>cd ~/source/azure/001.queueTriggeredFunction/sender/"</code></pre>
 <p>Open Program.cs</p>
@@ -357,7 +357,7 @@ dotnet run
 </code></pre>
 <p>In your terminal running azure function app project, you can see a message log.</p>
 
-<h2 id="9-deploy-to-azure-function">9. Deploy To Azure Function</h2>
+<h3 id="9-deploy-to-azure-function">9. Deploy To Azure Function</h3>
 <p>Go to “~/source/azure/001.queueTriggeredFunction/{FunctionAppName}”</p>
 <pre><code>
 ## bash
@@ -365,7 +365,7 @@ func azure functionapp publish {FunctionAppName}
 
 </code></pre>
 
-<h3 id="91-test_2">9.1 Test_2</h3>
+<h4 id="1-test-2">1) Test 2</h4>
 <p>Go to “~/source/azure/001.queueTriggeredFunction/sender/”</p>
 <pre><code>
 ## bash

@@ -184,44 +184,44 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h1 id="describe-this-pattern-1">Describe this pattern <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h1>
+                    <h2 id="describe-this-pattern-1">Describe this pattern <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h2>
 
-<h2 id="1-feature">1. Feature</h2>
+<h3 id="1-feature">1. Feature</h3>
 <ul>
   <li>Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic.</li>
   <li>We can also check change of scales depending on request.</li>
 </ul>
 
-<h2 id="2-advantages">2. Advantages</h2>
+<h3 id="2-advantages">2. Advantages</h3>
 <ul>
   <li>In case of service disorder, clients could send request due to queue as buffer.</li>
   <li>scaling up and down number of queues and services. As a result, we could maximize availability.</li>
   <li>optimizing cost.</li>
 </ul>
 
-<h2 id="3-requirement">3. Requirement</h2>
+<h3 id="3-requirement">3. Requirement</h3>
 <ul>
   <li>Need to control message processing speed</li>
   <li>Asynchronous messaging mechanism is needed</li>
   <li>It can be degraded because of competition caused by auto scaling.</li>
 </ul>
 
-<h1 id="use-case">Use case</h1>
+<h2 id="use-case">Use case</h2>
 
-<h2 id="1-faced-problem-case-1">1. Faced Problem (Case 1)</h2>
+<h3 id="1-faced-problem-case-1">1. Faced Problem (Case 1)</h3>
 <p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-overwhelmed.png" /></p>
 <ul>
   <li>Service can fail, if requests from web app to datastore are increased.</li>
 </ul>
 
-<h2 id="2-solution-case-2">2. Solution (Case 2)</h2>
+<h3 id="2-solution-case-2">2. Solution (Case 2)</h3>
 <p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png" /></p>
 <ul>
   <li>It could control writing speed to datastore using Service bus queue and Function app.</li>
 </ul>
 
-<h1 id="example">Example</h1>
-<h2 id="1-plan">1. Plan</h2>
+<h2 id="example">Example</h2>
+<h3 id="1-plan">1. Plan</h3>
 <ul>
   <li>Suppose to Health care system that collects body heat and heartbeat in seconds.</li>
   <li>Use Azure table storage as datastore (Because it has limit of processing transaction so that it will occur disorder)</li>
@@ -230,14 +230,14 @@ into the {body} of the default.hbs template -->
   <li>All requests will complete due to queue as buffer.</li>
 </ul>
 
-<h2 id="2-practice">2. Practice</h2>
+<h3 id="2-practice">2. Practice</h3>
 <ul>
   <li>It already wrote in github repository. <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></li>
   <li>Before inserting data from <strong>service bus queue</strong> to <strong>Table storage</strong> using <strong>Azure function app</strong>, I inserted 6000+ data to <strong>service bus queue</strong> in advance. (It takes 30 minutes)
 <img style="width: 700px" src="/assets/images/loadLeveling_queueCount.png" /></li>
   <li>And then, running <strong>Azure function app</strong> to put data into <strong>Table storage</strong> (It takes only a few seconds)
 <img style="width: 700px" src="/assets/images/loadLeveling_tableMetric.png" />
-    <h1 id="lessen--learn">Lessen &amp; Learn</h1>
+    <h2 id="lessen--learn">Lessen &amp; Learn</h2>
   </li>
   <li>Testing on Case 1 : Pass
     <ul>

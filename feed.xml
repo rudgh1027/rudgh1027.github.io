@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-12-06T19:28:17+09:00</updated><id>/</id><title type="html">GKArchy</title><subtitle>IT Service Technology Blog</subtitle><entry><title type="html">Deploy Dotnet MVC web</title><link href="/dotnetMVCDeploy" rel="alternate" type="text/html" title="Deploy Dotnet MVC web" /><published>2019-11-22T19:18:00+09:00</published><updated>2019-11-22T19:18:00+09:00</updated><id>/dotnetMVCDeploy</id><content type="html" xml:base="/dotnetMVCDeploy">&lt;h1 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h1&gt;
-&lt;h2 id=&quot;install-dotnet-core-sdk&quot;&gt;Install Dotnet core SDK&lt;/h2&gt;
-&lt;p&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-12-06T20:13:31+09:00</updated><id>/</id><title type="html">GKArchy</title><subtitle>IT Service Technology Blog</subtitle><entry><title type="html">Deploy Dotnet MVC web</title><link href="/dotnetMVCDeploy" rel="alternate" type="text/html" title="Deploy Dotnet MVC web" /><published>2019-11-22T19:18:00+09:00</published><updated>2019-11-22T19:18:00+09:00</updated><id>/dotnetMVCDeploy</id><content type="html" xml:base="/dotnetMVCDeploy">&lt;h2 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h2&gt;
+&lt;h3 id=&quot;1-install-dotnet-core-sdk&quot;&gt;1. Install Dotnet core SDK&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current&quot;&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current&lt;/a&gt;
 &lt;br /&gt;Find OS Type and version matches your environment.
 &lt;br /&gt;In my case, using ubuntu 18.x version&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
@@ -14,7 +14,7 @@ sudo apt-get install dotnet-sdk-3.0 -y
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;pull-dotnet-core-image&quot;&gt;Pull dotnet core image&lt;/h2&gt;
+&lt;h3 id=&quot;2-pull-dotnet-core-image&quot;&gt;2. Pull dotnet core image&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 docker search dotnet
     ## result
@@ -32,8 +32,8 @@ docker pull microsoft/dotnet:latest
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&quot;make-dotnet-project&quot;&gt;Make Dotnet Project&lt;/h1&gt;
-&lt;h2 id=&quot;create-project&quot;&gt;create project&lt;/h2&gt;
+&lt;h2 id=&quot;make-dotnet-project&quot;&gt;Make Dotnet Project&lt;/h2&gt;
+&lt;h3 id=&quot;1-create-project&quot;&gt;1. create project&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## make solution file
 mkdir test
@@ -47,8 +47,8 @@ dotnet new mvc
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;local-test&quot;&gt;Local Test&lt;/h2&gt;
-&lt;h3 id=&quot;change-listening-port-1&quot;&gt;Change Listening port &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;2-local-test&quot;&gt;2. Local Test&lt;/h3&gt;
+&lt;h4 id=&quot;1-change-listening-port-1&quot;&gt;1) Change Listening port &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;b&gt;This is just for local test purpose.&lt;/b&gt; It is useless setting After deploying as docker container, because docker automatically configure port fowarding setting.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
@@ -79,7 +79,7 @@ public class Program
   &lt;p&gt;Change the port from 80, 5000 to any number you want&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;run-dotnet-project-and-check-connection&quot;&gt;Run dotnet project and check connection&lt;/h3&gt;
+&lt;h4 id=&quot;2-run-dotnet-project-and-check-connection&quot;&gt;2) Run dotnet project and check connection&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;
 cd ~/test/test
 dotnet run
@@ -91,9 +91,9 @@ dotnet run
 &lt;p&gt;Type http://(public ip):(your port) on your browser
 You can see a dotnet default web page. Press ctl+c on your server machine to exit the web service.&lt;/p&gt;
 
-&lt;h1 id=&quot;deploy-to-docker-2&quot;&gt;Deploy to Docker &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;deploy-to-docker-2&quot;&gt;Deploy to Docker &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 
-&lt;h2 id=&quot;make-dockerfile&quot;&gt;Make Dockerfile&lt;/h2&gt;
+&lt;h3 id=&quot;3-make-dockerfile&quot;&gt;3. Make Dockerfile&lt;/h3&gt;
 &lt;p&gt;type “   vi ~/test/Dockerfile   “&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
@@ -119,7 +119,7 @@ ENTRYPOINT [&quot;dotnet&quot;, &quot;test.dll&quot;]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you want to use another project name, replace “test” to “Your Project Name”. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;run-in-a-linux-container&quot;&gt;Run in a Linux container&lt;/h2&gt;
+&lt;h3 id=&quot;4-run-in-a-linux-container&quot;&gt;4. Run in a Linux container&lt;/h3&gt;
 &lt;p&gt;Go to directory that has Dockerfile, Build and Deploy.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 cd ~/test/
@@ -164,17 +164,17 @@ docker run -it --rm -p 5000:80 --name test_docker_aspnet test -d
             &lt;a href=&quot;#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
     &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/section&gt;</content><author><name>gkarchy</name></author><category term="devops" /><category term="systemengineer" /><summary type="html">Setting environment Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb</summary></entry><entry><title type="html">CICD pipeline for container based workloads</title><link href="/CICD-pipeline-for-container-based-workloads" rel="alternate" type="text/html" title="CICD pipeline for container based workloads" /><published>2019-11-12T19:18:00+09:00</published><updated>2019-11-12T19:18:00+09:00</updated><id>/CICD-pipeline-for-container-based-workloads</id><content type="html" xml:base="/CICD-pipeline-for-container-based-workloads">&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+&lt;/section&gt;</content><author><name>gkarchy</name></author><category term="devops" /><category term="systemengineer" /><summary type="html">Setting environment 1. Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb</summary></entry><entry><title type="html">CICD pipeline for container based workloads</title><link href="/CICD-pipeline-for-container-based-workloads" rel="alternate" type="text/html" title="CICD pipeline for container based workloads" /><published>2019-11-12T19:18:00+09:00</published><updated>2019-11-12T19:18:00+09:00</updated><id>/CICD-pipeline-for-container-based-workloads</id><content type="html" xml:base="/CICD-pipeline-for-container-based-workloads">&lt;h2 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;br /&gt;
 &lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;feature&quot;&gt;Feature&lt;/h2&gt;
+&lt;h3 id=&quot;feature&quot;&gt;Feature&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;In order to know details about this architecture, click above URL.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;implement&quot;&gt;Implement&lt;/h1&gt;
-&lt;h2 id=&quot;1-make-resource-from-predefined-template&quot;&gt;1. Make resource from predefined template.&lt;/h2&gt;
+&lt;h2 id=&quot;implement&quot;&gt;Implement&lt;/h2&gt;
+&lt;h3 id=&quot;1-make-resource-from-predefined-template&quot;&gt;1. Make resource from predefined template.&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;Right click the Link: &lt;a href=&quot;https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fdevops-with-aks%2Fazuredeploy.json&quot;&gt;Click Here&lt;/a&gt;, and open in the new tab.&lt;/p&gt;
@@ -207,7 +207,7 @@ docker run -it --rm -p 5000:80 --name test_docker_aspnet test -d
   &lt;li&gt;Waiting for 20-30 minute.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-enter-jenkins-web-page&quot;&gt;2. Enter Jenkins Web Page.&lt;/h2&gt;
+&lt;h3 id=&quot;2-enter-jenkins-web-page&quot;&gt;2. Enter Jenkins Web Page.&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Click Jenkins server on your resource tab in azure portal. And copy public IP Address of jenkins server.&lt;/li&gt;
   &lt;li&gt;Type http://(public ip address) on your browser. Than you can see the page like below.
@@ -229,18 +229,17 @@ docker run -it --rm -p 5000:80 --name test_docker_aspnet test -d
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.jenkins_pipeline.png&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;3-enter-grafana-web-page&quot;&gt;3. Enter Grafana Web Page.&lt;/h2&gt;
+&lt;h3 id=&quot;3-enter-grafana-web-page&quot;&gt;3. Enter Grafana Web Page.&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Reset admin password
     &lt;ul&gt;
       &lt;li&gt;Check public IP address of Grafana VM. Type &lt;code&gt;ssh (your admin ID)@(Grafana Public IP)&lt;/code&gt; on your cloud shell.&lt;/li&gt;
     &lt;/ul&gt;
-    &lt;pre style=&quot;width:50%;&quot;&gt;&lt;code&gt;
+    &lt;pre style=&quot;max-width: 815px;&quot;&gt;&lt;code&gt;
   sudo -s
   apt install sqlite3
   sqlite3 /var/lib/grafana/grafana.db
-  update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', 
-  salt = 'F3FAxVm33R' where login = 'admin'
+  update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin'
     
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
@@ -262,9 +261,9 @@ To fill in the blacks, type “ac account list” on your azure cloud shell.&lt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;4-make-container-image-in-acr&quot;&gt;4. Make container image in ACR&lt;/h2&gt;
+&lt;h3 id=&quot;4-make-container-image-in-acr&quot;&gt;4. Make container image in ACR&lt;/h3&gt;
 
-&lt;h3 id=&quot;1-make-development-environment&quot;&gt;1) Make development environment&lt;/h3&gt;
+&lt;h4 id=&quot;1-make-development-environment&quot;&gt;1) Make development environment&lt;/h4&gt;
 &lt;p&gt;Before login to ACR (Azure Container Registry), you’re supposed to have environment that has docker engine and az cli package.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Deploy ubuntu server with docker engine in azure.&lt;/li&gt;
@@ -324,14 +323,14 @@ apt install jq
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;2-login-to-az-cli-with-sp&quot;&gt;2) Login to az cli with SP&lt;/h3&gt;
+&lt;h4 id=&quot;2-login-to-az-cli-with-sp&quot;&gt;2) Login to az cli with SP&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;
 az login --service-principal -u http://((SP name)) --tenant ((your tenant name))
 ##input SP password
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;3-login-to-acr&quot;&gt;3) Login to ACR&lt;/h3&gt;
+&lt;h4 id=&quot;3-login-to-acr&quot;&gt;3) Login to ACR&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;
 acrname=$(az acr list --resource-group ((your RG name)) | jq -r &quot;.[].name&quot;)
 az acr login --name $acrname
@@ -339,11 +338,11 @@ az acr login --name $acrname
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;4-make-docker-web-application&quot;&gt;4) Make docker web application&lt;/h3&gt;
+&lt;h4 id=&quot;4-make-docker-web-application&quot;&gt;4) Make docker web application&lt;/h4&gt;
 &lt;p&gt;In this step, I’ll use ASP.NET MVC WEB image.
 Look at the post &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;5-push-to-the-acr-5&quot;&gt;5) Push to the ACR &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn5&quot; id=&quot;fnref5&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;h4 id=&quot;5-push-to-the-acr-5&quot;&gt;5) Push to the ACR &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn5&quot; id=&quot;fnref5&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
 &lt;p&gt;After done precess that written in the above post&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 loginsvr=$(az acr list --resource-group ((your resource group name)) | jq -r &quot;.[].loginServer&quot;)
@@ -359,26 +358,26 @@ az acr repository list --name $acrname --output table
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;5-deploy-container-to-aks-6&quot;&gt;5. Deploy container to AKS &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn6&quot; id=&quot;fnref6&quot;&gt;[6]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-&lt;h3 id=&quot;1-install-the-kubernetes-cli&quot;&gt;1) Install the kubernetes cli&lt;/h3&gt;
+&lt;h3 id=&quot;5-deploy-container-to-aks-6&quot;&gt;5. Deploy container to AKS &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn6&quot; id=&quot;fnref6&quot;&gt;[6]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;h4 id=&quot;1-install-the-kubernetes-cli&quot;&gt;1) Install the kubernetes cli&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;
 az aks install-cli
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;2-install-the-kubernetes-cli-7&quot;&gt;2) Install the kubernetes cli &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn7&quot; id=&quot;fnref7&quot;&gt;[7]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;h4 id=&quot;2-install-the-kubernetes-cli-7&quot;&gt;2) Install the kubernetes cli &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn7&quot; id=&quot;fnref7&quot;&gt;[7]&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;
 aksname=$(az aks list | jq -r &quot;.[].name&quot;)
 az aks get-credentials  --resource-group ((your resource group name)) --name $aksname
-## It will reply that &quot;Merged ((your aks name)) as current context in /home/((your admin id))/.kube/config&quot;
+### It will reply that &quot;Merged ((your aks name)) as current context in /home/((your admin id))/.kube/config&quot;
 
 kubectl get nodes
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;3-make-deployment-yaml-file&quot;&gt;3) Make deployment yaml file&lt;/h3&gt;
+&lt;h4 id=&quot;3-make-deployment-yaml-file&quot;&gt;3) Make deployment yaml file&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;
-## vi azure-asp-net-web.yaml
+### vi azure-asp-net-web.yaml
 
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -412,7 +411,7 @@ spec:
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;4-deploy-to-aks&quot;&gt;4) Deploy to AKS&lt;/h3&gt;
+&lt;h4 id=&quot;4-deploy-to-aks&quot;&gt;4) Deploy to AKS&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;
 ## create Pod, deployment, and service
 kubectl create -f azure-asp-net-web.yaml
@@ -429,7 +428,7 @@ kubectl get deployment
   
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;6-continueously-manage-by-jenkins-and-github--see-the-below-reference-8&quot;&gt;6. Continueously manage by Jenkins and github : See the below reference &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn8&quot; id=&quot;fnref8&quot;&gt;[8]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;6-continueously-manage-by-jenkins-and-github--see-the-below-reference-8&quot;&gt;6. Continueously manage by Jenkins and github : See the below reference &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn8&quot; id=&quot;fnref8&quot;&gt;[8]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 
 &lt;hr class=&quot;footnotes-sep&quot; /&gt;
 
@@ -484,44 +483,44 @@ kubectl get deployment
             &lt;a href=&quot;#fnref8&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
     &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/section&gt;</content><author><name>gkarchy</name></author><category term="devops" /><category term="azure" /><summary type="html">Describe this pattern [1]</summary></entry><entry><title type="html">Queue Based Load Leveling</title><link href="/queueBasedLoadLeveling" rel="alternate" type="text/html" title="Queue Based Load Leveling" /><published>2019-10-16T19:18:00+09:00</published><updated>2019-10-16T19:18:00+09:00</updated><id>/queueBasedLoadLeveling</id><content type="html" xml:base="/queueBasedLoadLeveling">&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+&lt;/section&gt;</content><author><name>gkarchy</name></author><category term="devops" /><category term="azure" /><summary type="html">Describe this pattern [1]</summary></entry><entry><title type="html">Queue Based Load Leveling</title><link href="/queueBasedLoadLeveling" rel="alternate" type="text/html" title="Queue Based Load Leveling" /><published>2019-10-16T19:18:00+09:00</published><updated>2019-10-16T19:18:00+09:00</updated><id>/queueBasedLoadLeveling</id><content type="html" xml:base="/queueBasedLoadLeveling">&lt;h2 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 
-&lt;h2 id=&quot;1-feature&quot;&gt;1. Feature&lt;/h2&gt;
+&lt;h3 id=&quot;1-feature&quot;&gt;1. Feature&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic.&lt;/li&gt;
   &lt;li&gt;We can also check change of scales depending on request.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-advantages&quot;&gt;2. Advantages&lt;/h2&gt;
+&lt;h3 id=&quot;2-advantages&quot;&gt;2. Advantages&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;In case of service disorder, clients could send request due to queue as buffer.&lt;/li&gt;
   &lt;li&gt;scaling up and down number of queues and services. As a result, we could maximize availability.&lt;/li&gt;
   &lt;li&gt;optimizing cost.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;3-requirement&quot;&gt;3. Requirement&lt;/h2&gt;
+&lt;h3 id=&quot;3-requirement&quot;&gt;3. Requirement&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Need to control message processing speed&lt;/li&gt;
   &lt;li&gt;Asynchronous messaging mechanism is needed&lt;/li&gt;
   &lt;li&gt;It can be degraded because of competition caused by auto scaling.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;use-case&quot;&gt;Use case&lt;/h1&gt;
+&lt;h2 id=&quot;use-case&quot;&gt;Use case&lt;/h2&gt;
 
-&lt;h2 id=&quot;1-faced-problem-case-1&quot;&gt;1. Faced Problem (Case 1)&lt;/h2&gt;
+&lt;h3 id=&quot;1-faced-problem-case-1&quot;&gt;1. Faced Problem (Case 1)&lt;/h3&gt;
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-overwhelmed.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Service can fail, if requests from web app to datastore are increased.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-solution-case-2&quot;&gt;2. Solution (Case 2)&lt;/h2&gt;
+&lt;h3 id=&quot;2-solution-case-2&quot;&gt;2. Solution (Case 2)&lt;/h3&gt;
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;It could control writing speed to datastore using Service bus queue and Function app.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;example&quot;&gt;Example&lt;/h1&gt;
-&lt;h2 id=&quot;1-plan&quot;&gt;1. Plan&lt;/h2&gt;
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+&lt;h3 id=&quot;1-plan&quot;&gt;1. Plan&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Suppose to Health care system that collects body heat and heartbeat in seconds.&lt;/li&gt;
   &lt;li&gt;Use Azure table storage as datastore (Because it has limit of processing transaction so that it will occur disorder)&lt;/li&gt;
@@ -530,14 +529,14 @@ kubectl get deployment
   &lt;li&gt;All requests will complete due to queue as buffer.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-practice&quot;&gt;2. Practice&lt;/h2&gt;
+&lt;h3 id=&quot;2-practice&quot;&gt;2. Practice&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;It already wrote in github repository. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
   &lt;li&gt;Before inserting data from &lt;strong&gt;service bus queue&lt;/strong&gt; to &lt;strong&gt;Table storage&lt;/strong&gt; using &lt;strong&gt;Azure function app&lt;/strong&gt;, I inserted 6000+ data to &lt;strong&gt;service bus queue&lt;/strong&gt; in advance. (It takes 30 minutes)
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_queueCount.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;And then, running &lt;strong&gt;Azure function app&lt;/strong&gt; to put data into &lt;strong&gt;Table storage&lt;/strong&gt; (It takes only a few seconds)
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_tableMetric.png&quot; /&gt;
-    &lt;h1 id=&quot;lessen--learn&quot;&gt;Lessen &amp;amp; Learn&lt;/h1&gt;
+    &lt;h2 id=&quot;lessen--learn&quot;&gt;Lessen &amp;amp; Learn&lt;/h2&gt;
   &lt;/li&gt;
   &lt;li&gt;Testing on Case 1 : Pass
     &lt;ul&gt;
@@ -626,10 +625,10 @@ kubectl get deployment
 &lt;p&gt;I'll implements this architecture using &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
 &lt;p&gt;I recommand you to follow everything in previous practice. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+&lt;h2 id=&quot;procedure&quot;&gt;Procedure&lt;/h2&gt;
 &lt;p&gt;If you complete all procedure in privious practice, comtinue following procedure.&lt;/p&gt;
 
-&lt;h2 id=&quot;1-get-source-from-github&quot;&gt;1. Get source from github&lt;/h2&gt;
+&lt;h3 id=&quot;1-get-source-from-github&quot;&gt;1. Get source from github&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 git init source           #source can be replaced with other directory name you want
 cd source
@@ -641,14 +640,14 @@ cd azure/002.queueTriggeredFunction_tableInsert/
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;2-editting-parameter-name&quot;&gt;2. Editting Parameter Name&lt;/h2&gt;
+&lt;h3 id=&quot;2-editting-parameter-name&quot;&gt;2. Editting Parameter Name&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## complete names of resources
 vi exported.dat
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;3-deploy-service-bus-queue-and-azure-function-app&quot;&gt;3. Deploy Service Bus Queue and Azure Function App&lt;/h2&gt;
+&lt;h3 id=&quot;3-deploy-service-bus-queue-and-azure-function-app&quot;&gt;3. Deploy Service Bus Queue and Azure Function App&lt;/h3&gt;
 &lt;p&gt;Just run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 ## deploy queue
@@ -658,7 +657,7 @@ vi exported.dat
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;4-make-project&quot;&gt;4. Make Project&lt;/h2&gt;
+&lt;h3 id=&quot;4-make-project&quot;&gt;4. Make Project&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ./makeProj.sh
 ## Select a worker runtime:
@@ -689,7 +688,7 @@ az storage table create --name {yourTableStorageName} --account-name {yourStorag
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;6-editting-functionappnamecs-source---2&quot;&gt;6. Editting {FunctionAppName}.cs Source   &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;6-editting-functionappnamecs-source---2&quot;&gt;6. Editting {FunctionAppName}.cs Source   &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 
 &lt;p&gt;Open ~/source/azure/002.queueTriggeredFunction_tableInsert/(projectname).cs&lt;/p&gt;
 &lt;p&gt;Now our codes are&lt;/p&gt;
@@ -747,7 +746,7 @@ namespace funcgkim0012
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;7-import-nuget-package&quot;&gt;7. Import Nuget Package&lt;/h2&gt;
+&lt;h3 id=&quot;7-import-nuget-package&quot;&gt;7. Import Nuget Package&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## In your azure cloud shell, cd ..../{yourfunctionapp}/
 ## Import package of webjobs storage extension
@@ -756,7 +755,7 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage --version 3.0.4
 dotnet add package Newtonsoft.Json --version 11.0.2
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;8-local-build&quot;&gt;8. Local Build&lt;/h2&gt;
+&lt;h3 id=&quot;8-local-build&quot;&gt;8. Local Build&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## bash
 func start --build
@@ -774,7 +773,7 @@ Parameter name: provider
 &lt;p&gt;Then you have to use other extension version of azuer Storage. This error was occured because visual studio code and package version didn't match.&lt;/p&gt;
 &lt;p&gt;I recommand 3.0.4 version of &lt;b&gt;Microsoft.Azure.WebJobs.Extensions.Storage&lt;/b&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;81-test_1&quot;&gt;8.1 Test_1&lt;/h3&gt;
+&lt;h4 id=&quot;1-test-1&quot;&gt;1) Test 1&lt;/h4&gt;
 &lt;p&gt;Open another tab at your browser and open additional terminal in azure. And then type..&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd ~/source/azure/001.queueTriggeredFunction/sender/&quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Open Program.cs&lt;/p&gt;
@@ -794,7 +793,7 @@ dotnet run
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In your terminal running azure function app project, you can see a message log.&lt;/p&gt;
 
-&lt;h2 id=&quot;9-deploy-to-azure-function&quot;&gt;9. Deploy To Azure Function&lt;/h2&gt;
+&lt;h3 id=&quot;9-deploy-to-azure-function&quot;&gt;9. Deploy To Azure Function&lt;/h3&gt;
 &lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/{FunctionAppName}”&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 ## bash
@@ -802,7 +801,7 @@ func azure functionapp publish {FunctionAppName}
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;91-test_2&quot;&gt;9.1 Test_2&lt;/h3&gt;
+&lt;h4 id=&quot;1-test-2&quot;&gt;1) Test 2&lt;/h4&gt;
 &lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/sender/”&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 ## bash
@@ -832,10 +831,10 @@ dotnet run
 &lt;p&gt;&lt;img style=&quot;width: 700px;&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-pattern.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;We are going to make &lt;b&gt;dotnet console application as task&lt;/b&gt;, &lt;b&gt;azure function app as service&lt;/b&gt;.&lt;/p&gt;
 
-&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+&lt;h2 id=&quot;procedure&quot;&gt;Procedure&lt;/h2&gt;
 &lt;p&gt;This pratice is optimized for &lt;b&gt;bash shell and azure cli in Azure Cloud Shell.&lt;/b&gt; Go to azure portal and run azure cloud shell&lt;/p&gt;
 
-&lt;h2 id=&quot;1-get-source-from-github&quot;&gt;1. Get source from github&lt;/h2&gt;
+&lt;h3 id=&quot;1-get-source-from-github&quot;&gt;1. Get source from github&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 git init {source}           #{source} can be replaced with other directory name you want
 cd source
@@ -847,14 +846,14 @@ cd azure/001.queueTriggeredFunction/
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;2-editting-parameter-name&quot;&gt;2. Editting Parameter Name&lt;/h2&gt;
+&lt;h3 id=&quot;2-editting-parameter-name&quot;&gt;2. Editting Parameter Name&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## complete names of resources
 vi exported.dat
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;3-deploy-service-bus-queue-and-azure-function-app&quot;&gt;3. Deploy Service Bus Queue and Azure Function App&lt;/h2&gt;
+&lt;h3 id=&quot;3-deploy-service-bus-queue-and-azure-function-app&quot;&gt;3. Deploy Service Bus Queue and Azure Function App&lt;/h3&gt;
 &lt;p&gt;Just run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 ## deploy queue
@@ -864,7 +863,7 @@ vi exported.dat
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;4-make-project&quot;&gt;4. Make Project&lt;/h2&gt;
+&lt;h3 id=&quot;4-make-project&quot;&gt;4. Make Project&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ./makeProj.sh
 ## Select a worker runtime:
@@ -876,7 +875,7 @@ vi exported.dat
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;5-editting-functionappnamecs-source&quot;&gt;5. Editting {FunctionAppName}.cs Source&lt;/h2&gt;
+&lt;h3 id=&quot;5-editting-functionappnamecs-source&quot;&gt;5. Editting {FunctionAppName}.cs Source&lt;/h3&gt;
 &lt;p&gt;Now we can see Visual Studio code edittor.
 Open ~/source/azure/001.queueTriggeredFunction/(projectname).cs&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
@@ -924,7 +923,7 @@ namespace funcgkim0012
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;6-import-nuget-package&quot;&gt;6. Import Nuget Package&lt;/h2&gt;
+&lt;h3 id=&quot;6-import-nuget-package&quot;&gt;6. Import Nuget Package&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## In your azure cloud shell, cd ..../{yourfunctionapp}/
 ## Import package of webjobs storage extension
@@ -932,14 +931,14 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage --version 3.0.4
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;7-local-build&quot;&gt;7. Local Build&lt;/h2&gt;
+&lt;h3 id=&quot;7-local-build&quot;&gt;7. Local Build&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## bash
 func start --build
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;71-test_1&quot;&gt;7.1 Test_1&lt;/h3&gt;
+&lt;h4 id=&quot;1-test_1&quot;&gt;1) Test_1&lt;/h4&gt;
 &lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/sender/”&lt;/p&gt;
 &lt;p&gt;Open Program.cs and insert your queue name and connectionString.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
@@ -959,7 +958,7 @@ dotnet run
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In your terminal running azure function app project, you can see a message log.&lt;/p&gt;
 
-&lt;h2 id=&quot;8-deploy-to-azure-function&quot;&gt;8. Deploy To Azure Function&lt;/h2&gt;
+&lt;h3 id=&quot;8-deploy-to-azure-function&quot;&gt;8. Deploy To Azure Function&lt;/h3&gt;
 &lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/{FunctionAppName}”&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 ## bash
@@ -967,7 +966,7 @@ func azure functionapp publish {FunctionAppName}
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;81-test_2&quot;&gt;8.1 Test_2&lt;/h3&gt;
+&lt;h4 id=&quot;1-test_2&quot;&gt;1) Test_2&lt;/h4&gt;
 &lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/sender/”&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 ## bash
@@ -1030,7 +1029,7 @@ connectionString=$(az servicebus namespace authorization-rule keys list --resour
         &lt;li&gt;General pattern of messaging queue. Sender just posts a meesage and receiver just retrieve it to process some logic.&lt;/li&gt;
         &lt;li&gt;Reference Architecture&lt;sub&gt;(azure)&lt;/sub&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
         &lt;img src=&quot;/assets/images/scalable-web-app.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
-        &lt;p&gt;- improving scalability and performance in an Azure App Service web application&lt;br /&gt;- Go to link of no [3]. We can use deployment script generating azure resource and application code on github reposipory.&lt;/p&gt;
+        &lt;p&gt;- improving scalability and performance in an Azure App Service web application&lt;br /&gt;- Go to the link [3]. We can use deployment script generating azure resource and application code on github reposipory.&lt;/p&gt;
         &lt;li&gt;&lt;a href=&quot;https://rudgh1027.github.io/queue-Triggered-Function_tableInsert&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
     &lt;li&gt;Request/response messaging&lt;/li&gt;

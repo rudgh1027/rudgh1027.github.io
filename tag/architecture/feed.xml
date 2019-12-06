@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/architecture/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-06T19:28:17+09:00</updated>
+  <updated>2019-12-06T20:13:31+09:00</updated>
   <id>/tag/architecture/feed.xml</id>
 
   
@@ -37,44 +37,44 @@
       <published>2019-10-16T19:18:00+09:00</published>
       <updated>2019-10-16T19:18:00+09:00</updated>
       <id>/queueBasedLoadLeveling</id>
-      <content type="html" xml:base="/queueBasedLoadLeveling">&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+      <content type="html" xml:base="/queueBasedLoadLeveling">&lt;h2 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 
-&lt;h2 id=&quot;1-feature&quot;&gt;1. Feature&lt;/h2&gt;
+&lt;h3 id=&quot;1-feature&quot;&gt;1. Feature&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic.&lt;/li&gt;
   &lt;li&gt;We can also check change of scales depending on request.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-advantages&quot;&gt;2. Advantages&lt;/h2&gt;
+&lt;h3 id=&quot;2-advantages&quot;&gt;2. Advantages&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;In case of service disorder, clients could send request due to queue as buffer.&lt;/li&gt;
   &lt;li&gt;scaling up and down number of queues and services. As a result, we could maximize availability.&lt;/li&gt;
   &lt;li&gt;optimizing cost.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;3-requirement&quot;&gt;3. Requirement&lt;/h2&gt;
+&lt;h3 id=&quot;3-requirement&quot;&gt;3. Requirement&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Need to control message processing speed&lt;/li&gt;
   &lt;li&gt;Asynchronous messaging mechanism is needed&lt;/li&gt;
   &lt;li&gt;It can be degraded because of competition caused by auto scaling.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;use-case&quot;&gt;Use case&lt;/h1&gt;
+&lt;h2 id=&quot;use-case&quot;&gt;Use case&lt;/h2&gt;
 
-&lt;h2 id=&quot;1-faced-problem-case-1&quot;&gt;1. Faced Problem (Case 1)&lt;/h2&gt;
+&lt;h3 id=&quot;1-faced-problem-case-1&quot;&gt;1. Faced Problem (Case 1)&lt;/h3&gt;
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-overwhelmed.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Service can fail, if requests from web app to datastore are increased.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-solution-case-2&quot;&gt;2. Solution (Case 2)&lt;/h2&gt;
+&lt;h3 id=&quot;2-solution-case-2&quot;&gt;2. Solution (Case 2)&lt;/h3&gt;
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;It could control writing speed to datastore using Service bus queue and Function app.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;example&quot;&gt;Example&lt;/h1&gt;
-&lt;h2 id=&quot;1-plan&quot;&gt;1. Plan&lt;/h2&gt;
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+&lt;h3 id=&quot;1-plan&quot;&gt;1. Plan&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Suppose to Health care system that collects body heat and heartbeat in seconds.&lt;/li&gt;
   &lt;li&gt;Use Azure table storage as datastore (Because it has limit of processing transaction so that it will occur disorder)&lt;/li&gt;
@@ -83,14 +83,14 @@
   &lt;li&gt;All requests will complete due to queue as buffer.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-practice&quot;&gt;2. Practice&lt;/h2&gt;
+&lt;h3 id=&quot;2-practice&quot;&gt;2. Practice&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;It already wrote in github repository. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
   &lt;li&gt;Before inserting data from &lt;strong&gt;service bus queue&lt;/strong&gt; to &lt;strong&gt;Table storage&lt;/strong&gt; using &lt;strong&gt;Azure function app&lt;/strong&gt;, I inserted 6000+ data to &lt;strong&gt;service bus queue&lt;/strong&gt; in advance. (It takes 30 minutes)
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_queueCount.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;And then, running &lt;strong&gt;Azure function app&lt;/strong&gt; to put data into &lt;strong&gt;Table storage&lt;/strong&gt; (It takes only a few seconds)
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_tableMetric.png&quot; /&gt;
-    &lt;h1 id=&quot;lessen--learn&quot;&gt;Lessen &amp;amp; Learn&lt;/h1&gt;
+    &lt;h2 id=&quot;lessen--learn&quot;&gt;Lessen &amp;amp; Learn&lt;/h2&gt;
   &lt;/li&gt;
   &lt;li&gt;Testing on Case 1 : Pass
     &lt;ul&gt;
@@ -232,7 +232,7 @@
         &lt;li&gt;General pattern of messaging queue. Sender just posts a meesage and receiver just retrieve it to process some logic.&lt;/li&gt;
         &lt;li&gt;Reference Architecture&lt;sub&gt;(azure)&lt;/sub&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
         &lt;img src=&quot;/assets/images/scalable-web-app.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
-        &lt;p&gt;- improving scalability and performance in an Azure App Service web application&lt;br /&gt;- Go to link of no [3]. We can use deployment script generating azure resource and application code on github reposipory.&lt;/p&gt;
+        &lt;p&gt;- improving scalability and performance in an Azure App Service web application&lt;br /&gt;- Go to the link [3]. We can use deployment script generating azure resource and application code on github reposipory.&lt;/p&gt;
         &lt;li&gt;&lt;a href=&quot;https://rudgh1027.github.io/queue-Triggered-Function_tableInsert&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
     &lt;li&gt;Request/response messaging&lt;/li&gt;

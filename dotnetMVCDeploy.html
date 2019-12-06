@@ -43,7 +43,7 @@
     <meta property="og:site_name" content="GKArchy" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Deploy Dotnet MVC web" />
-    <meta property="og:description" content="Setting environment Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb sudo apt-get update sudo apt-get install apt-transport-https sudo apt-get update sudo apt-get install dotnet-sdk-3.0 -y Pull dotnet core image" />
+    <meta property="og:description" content="Setting environment 1. Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb sudo apt-get update sudo apt-get install apt-transport-https sudo apt-get update sudo apt-get install dotnet-sdk-3.0 -y 2. Pull dotnet" />
     <meta property="og:url" content="/dotnetMVCDeploy" />
     <meta property="og:image" content="/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/ghost" />
@@ -53,7 +53,7 @@
     <meta property="article:tag" content="Devops" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Deploy Dotnet MVC web" />
-    <meta name="twitter:description" content="Setting environment Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb sudo apt-get update sudo apt-get install apt-transport-https sudo apt-get update sudo apt-get install dotnet-sdk-3.0 -y Pull dotnet core image" />
+    <meta name="twitter:description" content="Setting environment 1. Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb sudo apt-get update sudo apt-get install apt-transport-https sudo apt-get update sudo apt-get install dotnet-sdk-3.0 -y 2. Pull dotnet" />
     <meta name="twitter:url" content="/" />
     <meta name="twitter:image" content="/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -85,7 +85,7 @@
         "@type": "WebPage",
         "@id": "/dotnetMVCDeploy"
     },
-    "description": "Setting environment Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb sudo apt-get update sudo apt-get install apt-transport-https sudo apt-get update sudo apt-get install dotnet-sdk-3.0 -y Pull dotnet core image"
+    "description": "Setting environment 1. Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb sudo apt-get update sudo apt-get install apt-transport-https sudo apt-get update sudo apt-get install dotnet-sdk-3.0 -y 2. Pull dotnet"
 }
     </script>
 
@@ -184,9 +184,9 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h1 id="setting-environment">Setting environment</h1>
-<h2 id="install-dotnet-core-sdk">Install Dotnet core SDK</h2>
-<p>https://dotnet.microsoft.com/download/linux-package-manager/sdk-current
+                    <h2 id="setting-environment">Setting environment</h2>
+<h3 id="1-install-dotnet-core-sdk">1. Install Dotnet core SDK</h3>
+<p><a href="https://dotnet.microsoft.com/download/linux-package-manager/sdk-current">https://dotnet.microsoft.com/download/linux-package-manager/sdk-current</a>
 <br />Find OS Type and version matches your environment.
 <br />In my case, using ubuntu 18.x version</p>
 <pre><code>
@@ -200,7 +200,7 @@ sudo apt-get install dotnet-sdk-3.0 -y
 
 </code></pre>
 
-<h2 id="pull-dotnet-core-image">Pull dotnet core image</h2>
+<h3 id="2-pull-dotnet-core-image">2. Pull dotnet core image</h3>
 <pre><code>
 docker search dotnet
     ## result
@@ -218,8 +218,8 @@ docker pull microsoft/dotnet:latest
 
 </code></pre>
 
-<h1 id="make-dotnet-project">Make Dotnet Project</h1>
-<h2 id="create-project">create project</h2>
+<h2 id="make-dotnet-project">Make Dotnet Project</h2>
+<h3 id="1-create-project">1. create project</h3>
 <pre><code>
 ## make solution file
 mkdir test
@@ -233,8 +233,8 @@ dotnet new mvc
 
 </code></pre>
 
-<h2 id="local-test">Local Test</h2>
-<h3 id="change-listening-port-1">Change Listening port <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h3>
+<h3 id="2-local-test">2. Local Test</h3>
+<h4 id="1-change-listening-port-1">1) Change Listening port <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h4>
 <p><b>This is just for local test purpose.</b> It is useless setting After deploying as docker container, because docker automatically configure port fowarding setting.</p>
 
 <pre><code>
@@ -265,7 +265,7 @@ public class Program
   <p>Change the port from 80, 5000 to any number you want</p>
 </blockquote>
 
-<h3 id="run-dotnet-project-and-check-connection">Run dotnet project and check connection</h3>
+<h4 id="2-run-dotnet-project-and-check-connection">2) Run dotnet project and check connection</h4>
 <pre><code>
 cd ~/test/test
 dotnet run
@@ -277,9 +277,9 @@ dotnet run
 <p>Type http://(public ip):(your port) on your browser
 You can see a dotnet default web page. Press ctl+c on your server machine to exit the web service.</p>
 
-<h1 id="deploy-to-docker-2">Deploy to Docker <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h1>
+<h2 id="deploy-to-docker-2">Deploy to Docker <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h2>
 
-<h2 id="make-dockerfile">Make Dockerfile</h2>
+<h3 id="3-make-dockerfile">3. Make Dockerfile</h3>
 <p>type “   vi ~/test/Dockerfile   “</p>
 
 <pre><code>
@@ -305,7 +305,7 @@ ENTRYPOINT ["dotnet", "test.dll"]
 </code></pre>
 <p>If you want to use another project name, replace “test” to “Your Project Name”. <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></p>
 
-<h2 id="run-in-a-linux-container">Run in a Linux container</h2>
+<h3 id="4-run-in-a-linux-container">4. Run in a Linux container</h3>
 <p>Go to directory that has Dockerfile, Build and Deploy.</p>
 <pre><code>
 cd ~/test/
