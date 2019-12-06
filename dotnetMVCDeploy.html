@@ -34,7 +34,7 @@
     <![endif]-->
     
     <!-- This tag outputs SEO meta+structured data and other important settings -->
-    <meta name="description" content="The IT Service Technology Blog" />
+    <meta name="description" content="IT Service Technology Blog" />
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
     <link rel="canonical" href="/dotnetMVCDeploy" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
@@ -244,26 +244,28 @@ vi Program.cs
 </code></pre>
 
 <blockquote>
-  <p>Setting like that
+  <pre><code>
 public class Program
   {
       public static void Main(string[] args)
       {
           CreateHostBuilder(args).Build().Run();
-      }</p>
+      }
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  public static IHostBuilder CreateHostBuilder(string[] args) =&gt;
-      Host.CreateDefaultBuilder(args)
-          .ConfigureWebHostDefaults(webBuilder =&gt;
-          {
-                  webBuilder.UseUrls("http://*:80;http://*:5000;")
-                  .UseStartup&lt;Startup&gt;();
-          });   }
-</code></pre></div>  </div>
+      public static IHostBuilder CreateHostBuilder(string[] args) =&gt;
+          Host.CreateDefaultBuilder(args)
+              .ConfigureWebHostDefaults(webBuilder =&gt;
+              {
+                      webBuilder.UseUrls("http://*:80;http://*:5000;")
+                      .UseStartup\&lt;Startup\&gt;();
+              });
+  }
 
-  <p>Change the port from 80, 5000 to any number you want
-<br /> reference : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls</p>
+ </code></pre>
+  <p>Change the port from 80, 5000 to any number you want</p>
 </blockquote>
+
+<p><br /> reference : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls</p>
 
 <h3 id="run-dotnet-project-and-check-connection">Run dotnet project and check connection</h3>
 <pre><code>
