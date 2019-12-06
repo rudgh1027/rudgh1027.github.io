@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/architecture/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-06T17:30:05+09:00</updated>
+  <updated>2019-12-06T19:28:17+09:00</updated>
   <id>/tag/architecture/feed.xml</id>
 
   
@@ -37,8 +37,7 @@
       <published>2019-10-16T19:18:00+09:00</published>
       <updated>2019-10-16T19:18:00+09:00</updated>
       <id>/queueBasedLoadLeveling</id>
-      <content type="html" xml:base="/queueBasedLoadLeveling">&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&lt;/p&gt;
+      <content type="html" xml:base="/queueBasedLoadLeveling">&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
 
 &lt;h2 id=&quot;1-feature&quot;&gt;1. Feature&lt;/h2&gt;
 &lt;ul&gt;
@@ -86,8 +85,7 @@
 
 &lt;h2 id=&quot;2-practice&quot;&gt;2. Practice&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;It already wrote in github repository.&lt;/li&gt;
-  &lt;li&gt;https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md&lt;/li&gt;
+  &lt;li&gt;It already wrote in github repository. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
   &lt;li&gt;Before inserting data from &lt;strong&gt;service bus queue&lt;/strong&gt; to &lt;strong&gt;Table storage&lt;/strong&gt; using &lt;strong&gt;Azure function app&lt;/strong&gt;, I inserted 6000+ data to &lt;strong&gt;service bus queue&lt;/strong&gt; in advance. (It takes 30 minutes)
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_queueCount.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;And then, running &lt;strong&gt;Azure function app&lt;/strong&gt; to put data into &lt;strong&gt;Table storage&lt;/strong&gt; (It takes only a few seconds)
@@ -105,37 +103,78 @@
       &lt;li&gt;Selecting SaaS product, Based on predictation of usage. (Example of NoSQL type)
         &lt;ul&gt;
           &lt;li&gt;Below 20,000 TPS : Azure table storage (Can be complemented by MQ)&lt;/li&gt;
-          &lt;li&gt;Below 10,000,000 TPS : Azure CosmosDB (Can be complemented by MQ)&lt;/li&gt;
-          &lt;li&gt;Over 10,000,000 TPS : Azure CosmosDB + Azure cache for Redis (https://azure.microsoft.com/en-us/services/cache/)&lt;/li&gt;
+          &lt;li&gt;Below 10,000,000 TPS : Azure CosmosDB (Can be complemented by MQ)&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+          &lt;li&gt;Over 10,000,000 TPS : Azure CosmosDB + Azure cache for Redis &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;Recommend Cosmos DB rather than Azure table storage(High TPS, Recovery option … etc)&lt;/li&gt;
-      &lt;li&gt;reference : https://docs.microsoft.com/en-us/azure/cosmos-db/table-support&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;Additional Example 1&lt;/li&gt;
+  &lt;li&gt;Additional Example 1 &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn5&quot; id=&quot;fnref5&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/images/scalable-web-app.png&quot; /&gt;&lt;/p&gt;
-
 &lt;ul&gt;
-  &lt;li&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Requet backgroud process using queue and function, so that it preserves scalablity and availability.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Additional Example 2&lt;/p&gt;
+    &lt;p&gt;Additional Example 2 &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn6&quot; id=&quot;fnref5&quot;&gt;[6]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
     &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/example-scenario/ai/media/mass-ingestion-newsfeeds-architecture.png&quot; /&gt;&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion&lt;/li&gt;
       &lt;li&gt;passing through several APIs sequentially&lt;/li&gt;
       &lt;li&gt;If certain API faces disorder or bottleneck, Queues take a role as buffer for load leveling.&lt;/li&gt;
       &lt;li&gt;If you complement this system using circuit-breaker and retry pattern, availability and efficiency will be maximized.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content>
+&lt;/ul&gt;
+
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+    &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md&quot;&gt;
+                &lt;small&gt;https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/cosmos-db/table-support&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/cosmos-db/table-support&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://azure.microsoft.com/en-us/services/cache/&quot;&gt;
+                &lt;small&gt;https://azure.microsoft.com/en-us/services/cache/&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn5&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref5&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn6&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref6&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;/section&gt;</content>
 
       
       
@@ -158,7 +197,7 @@
       
 
       
-        <summary type="html">Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling</summary>
+        <summary type="html">Describe this pattern [1]</summary>
       
 
       
@@ -166,12 +205,12 @@
     </entry>
   
     <entry>
-      <title type="html">Asynchronous Messaging Pattern 1</title>
-      <link href="/welcome-to-asynchronous-messaging_1" rel="alternate" type="text/html" title="Asynchronous Messaging Pattern 1" />
+      <title type="html">Asynchronous Messaging Pattern</title>
+      <link href="/welcome-to-asynchronous-messaging" rel="alternate" type="text/html" title="Asynchronous Messaging Pattern" />
       <published>2019-10-02T19:00:00+09:00</published>
       <updated>2019-10-02T19:00:00+09:00</updated>
-      <id>/welcome-to-asynchronous-messaging_1</id>
-      <content type="html" xml:base="/welcome-to-asynchronous-messaging_1">&lt;h3&gt;Intro&lt;/h3&gt;
+      <id>/welcome-to-asynchronous-messaging</id>
+      <content type="html" xml:base="/welcome-to-asynchronous-messaging">&lt;h3&gt;Intro&lt;/h3&gt;
 &lt;p&gt;Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.&lt;/p&gt;
 
 &lt;h3&gt;Feature and benefits&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
@@ -194,7 +233,7 @@
         &lt;li&gt;Reference Architecture&lt;sub&gt;(azure)&lt;/sub&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
         &lt;img src=&quot;/assets/images/scalable-web-app.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
         &lt;p&gt;- improving scalability and performance in an Azure App Service web application&lt;br /&gt;- Go to link of no [3]. We can use deployment script generating azure resource and application code on github reposipory.&lt;/p&gt;
-        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;https://rudgh1027.github.io/queue-Triggered-Function_tableInsert&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
     &lt;li&gt;Request/response messaging&lt;/li&gt;
     &lt;ul&gt;
@@ -202,7 +241,7 @@
         &lt;li&gt;Confirming whether messages have been proccessed(reliablity)&lt;/li&gt;
         &lt;li&gt;Need to separate communication channel as queue&lt;/li&gt;
         &lt;img src=&quot;/assets/images/request-response-messaging.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
-        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;!--&lt;a href=&quot;&quot;&gt;--&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;!--&lt;/a&gt;--&gt;&lt;/li&gt;
     &lt;/ul&gt;
     &lt;li&gt;Broadcast messaging&lt;/li&gt;
     &lt;ul&gt;
@@ -263,10 +302,6 @@
 
       
         <category term="architecture" />
-      
-        <category term="cloud" />
-      
-        <category term="azure" />
       
 
       

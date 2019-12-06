@@ -43,7 +43,7 @@
     <meta property="og:site_name" content="GKArchy" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="CICD pipeline for container based workloads" />
-    <meta property="og:description" content="Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks Feature In order to know details about this architecture, click above URL. Implement 1. Make resource from predefined template. Right click the Link: Click Here, and open in the new tab. Login to Azure, then you can see Custom deployment in azure portal. Click" />
+    <meta property="og:description" content="Describe this pattern [1] Feature In order to know details about this architecture, click above URL. Implement 1. Make resource from predefined template. Right click the Link: Click Here, and open in the new tab. Login to Azure, then you can see Custom deployment in azure portal. Click azure cloud" />
     <meta property="og:url" content="/CICD-pipeline-for-container-based-workloads" />
     <meta property="og:image" content="/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/ghost" />
@@ -53,7 +53,7 @@
     <meta property="article:tag" content="Devops" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="CICD pipeline for container based workloads" />
-    <meta name="twitter:description" content="Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks Feature In order to know details about this architecture, click above URL. Implement 1. Make resource from predefined template. Right click the Link: Click Here, and open in the new tab. Login to Azure, then you can see Custom deployment in azure portal. Click" />
+    <meta name="twitter:description" content="Describe this pattern [1] Feature In order to know details about this architecture, click above URL. Implement 1. Make resource from predefined template. Right click the Link: Click Here, and open in the new tab. Login to Azure, then you can see Custom deployment in azure portal. Click azure cloud" />
     <meta name="twitter:url" content="/" />
     <meta name="twitter:image" content="/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -85,7 +85,7 @@
         "@type": "WebPage",
         "@id": "/CICD-pipeline-for-container-based-workloads"
     },
-    "description": "Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks Feature In order to know details about this architecture, click above URL. Implement 1. Make resource from predefined template. Right click the Link: Click Here, and open in the new tab. Login to Azure, then you can see Custom deployment in azure portal. Click"
+    "description": "Describe this pattern [1] Feature In order to know details about this architecture, click above URL. Implement 1. Make resource from predefined template. Right click the Link: Click Here, and open in the new tab. Login to Azure, then you can see Custom deployment in azure portal. Click azure cloud"
 }
     </script>
 
@@ -184,9 +184,8 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h1 id="describe-this-pattern">Describe this pattern</h1>
-<p>reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks
-<br />
+                    <h1 id="describe-this-pattern-1">Describe this pattern <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h1>
+<p><br />
 <img style="width: 700px" src="https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png" /></p>
 
 <h2 id="feature">Feature</h2>
@@ -207,7 +206,7 @@ into the {body} of the default.hbs template -->
     <p>Click azure cloud shell button on the top of the web page.</p>
   </li>
   <li>After loading Azure Cloud Shell, Type <code>az ad sp create-for-rbac --name myDevOpsScenario</code>
-<br /> ※ If it says you don’t have sufficiant privilige, ask your owner of subscription to give you <b>Owner</b> role or custom role that has <b>Microsoft.Authorization/roleAssignments/write</b>. Every predefined role don’t have that permition. (reference : https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles )
+<br /> ※ If it says you don’t have sufficiant privilige, ask your owner of subscription to give you <b>Owner</b> role or custom role that has <b>Microsoft.Authorization/roleAssignments/write</b>. Every predefined role don’t have that permition. <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>
 <img style="width: 700px" src="/assets/images/001.spinfo.png" /></li>
   <li>
     <p>Make SSH Key : Type <code>ssh-keygen -t rsa -b 2048</code> on your cloud shell. Terminal may ask you key name and passphrase. Just type <b>Enter</b> key.</p>
@@ -244,8 +243,7 @@ into the {body} of the default.hbs template -->
   </li>
   <li>Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.
 <img style="width: 700px" src="/assets/images/unlock_jenkins.png" /></li>
-  <li>Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. <code>ssh (yourID)@(Jenkins Public IP)</code>. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type <code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code>
-※ Reference : https://docs.microsoft.com/ko-kr/azure/jenkins/install-jenkins-solution-template</li>
+  <li>Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. <code>ssh (yourID)@(Jenkins Public IP)</code>. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type <code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code> <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></li>
   <li>Create initial admin account and Install suggested plugins. Now, you can see Jenkins Dashboard.</li>
   <li>In main page of jenkins console, click <b>Hello World Build &amp; Deploy</b> link. Then you can see deployed pipeline.
 <img style="width: 700px" src="/assets/images/001.jenkins_pipeline.png" /></li>
@@ -363,9 +361,9 @@ az acr login --name $acrname
 
 <h3 id="4-make-docker-web-application">4) Make docker web application</h3>
 <p>In this step, I’ll use ASP.NET MVC WEB image.
-Look at the post : https://github.com/rudgh1027/cloud/blob/master/azure/docker/002.dotnetMVCDeploy.md</p>
+Look at the post <sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
 
-<h3 id="5-push-to-the-acr">5) Push to the ACR</h3>
+<h3 id="5-push-to-the-acr-5">5) Push to the ACR <sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></h3>
 <p>After done precess that written in the above post</p>
 <pre><code>
 loginsvr=$(az acr list --resource-group ((your resource group name)) | jq -r ".[].loginServer")
@@ -381,17 +379,14 @@ az acr repository list --name $acrname --output table
 
 </code></pre>
 
-<p><br />reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr</p>
-
-<h2 id="5-deploy-container-to-aks">5. Deploy container to AKS</h2>
+<h2 id="5-deploy-container-to-aks-6">5. Deploy container to AKS <sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></h2>
 <h3 id="1-install-the-kubernetes-cli">1) Install the kubernetes cli</h3>
 <pre><code>
 az aks install-cli
 
 </code></pre>
-<p>reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli</p>
 
-<h3 id="2-install-the-kubernetes-cli">2) Install the kubernetes cli</h3>
+<h3 id="2-install-the-kubernetes-cli-7">2) Install the kubernetes cli <sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup></h3>
 <pre><code>
 aksname=$(az aks list | jq -r ".[].name")
 az aks get-credentials  --resource-group ((your resource group name)) --name $aksname
@@ -400,7 +395,6 @@ az aks get-credentials  --resource-group ((your resource group name)) --name $ak
 kubectl get nodes
 
 </code></pre>
-<p>reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#connect-to-cluster-using-kubectl</p>
 
 <h3 id="3-make-deployment-yaml-file">3) Make deployment yaml file</h3>
 <pre><code>
@@ -455,9 +449,62 @@ kubectl get deployment
   
 </code></pre>
 
-<h2 id="6-continueously-manage-by-jenkins-and-github--see-the-below-reference">6. Continueously manage by Jenkins and github : See the below reference</h2>
-<p>reference : https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment</p>
+<h2 id="6-continueously-manage-by-jenkins-and-github--see-the-below-reference-8">6. Continueously manage by Jenkins and github : See the below reference <sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup></h2>
 
+<hr class="footnotes-sep" />
+
+<section class="footnotes">
+<ol class="footnotes-list">
+    <li id="fn1" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks">
+                <small>https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks</small>
+            </a> 
+            <a href="#fnref1" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn2" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles">
+                <small>https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles</small>
+            </a> 
+            <a href="#fnref2" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn3" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/ko-kr/azure/jenkins/install-jenkins-solution-template">
+                <small>https://docs.microsoft.com/ko-kr/azure/jenkins/install-jenkins-solution-template</small>
+            </a> 
+            <a href="#fnref3" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn4" class="footnote-item">
+            reference: <a href="https://rudgh1027.github.io/dotnetMVCDeploy">
+                <small>https://rudgh1027.github.io/dotnetMVCDeploy</small>
+            </a> 
+            <a href="#fnref4" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn5" class="footnote-item">
+            reference: <a href=" https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr">
+                <small> https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr</small>
+            </a> 
+            <a href="#fnref5" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn6" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli">
+                <small>https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli</small>
+            </a> 
+            <a href="#fnref6" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn7" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#connect-to-cluster-using-kubectl">
+                <small>https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#connect-to-cluster-using-kubectl</small>
+            </a> 
+            <a href="#fnref7" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn8" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment">
+                <small>https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment</small>
+            </a> 
+            <a href="#fnref8" class="footnote-backref">↩︎</a>
+    </li>
+</ol>
+</section>
 
                 </div>
             </section>

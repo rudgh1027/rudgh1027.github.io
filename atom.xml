@@ -33,9 +33,8 @@ sudo dpkg -i packages-microsoft-prod.deb
       <item>
         <title>CICD pipeline for container based workloads</title>
         
-          <description>&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks
-&lt;br /&gt;
+          <description>&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;br /&gt;
 &lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
 
 </description>
@@ -51,8 +50,7 @@ sudo dpkg -i packages-microsoft-prod.deb
       <item>
         <title>Queue Based Load Leveling</title>
         
-          <description>&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&lt;/p&gt;
+          <description>&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
 
 </description>
         
@@ -69,9 +67,8 @@ sudo dpkg -i packages-microsoft-prod.deb
         
           <description>&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;I'll use &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
-&lt;p&gt;It implements &lt;b&gt;https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction&lt;/b&gt;&lt;/p&gt;
-&lt;p&gt;So, I recommand you to follow everything in previous practice.&lt;/p&gt;
+&lt;p&gt;I'll implements this architecture using &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
+&lt;p&gt;I recommand you to follow everything in previous practice. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 </description>
         
@@ -123,7 +120,7 @@ sudo dpkg -i packages-microsoft-prod.deb
     
       
       <item>
-        <title>Asynchronous Messaging Pattern 1</title>
+        <title>Asynchronous Messaging Pattern</title>
         
           <description>&lt;h3&gt;Intro&lt;/h3&gt;
 &lt;p&gt;Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.&lt;/p&gt;
@@ -132,8 +129,8 @@ sudo dpkg -i packages-microsoft-prod.deb
         
         <pubDate>Wed, 02 Oct 2019 19:00:00 +0900</pubDate>
         <link>
-        /welcome-to-asynchronous-messaging_1</link>
-        <guid isPermaLink="true">/welcome-to-asynchronous-messaging_1</guid>
+        /welcome-to-asynchronous-messaging</link>
+        <guid isPermaLink="true">/welcome-to-asynchronous-messaging</guid>
       </item>
       
     

@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/systemengineer/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-06T17:30:05+09:00</updated>
+  <updated>2019-12-06T19:28:17+09:00</updated>
   <id>/tag/systemengineer/feed.xml</id>
 
   
@@ -87,7 +87,7 @@ dotnet new mvc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&quot;local-test&quot;&gt;Local Test&lt;/h2&gt;
-&lt;h3 id=&quot;change-listening-port&quot;&gt;Change Listening port&lt;/h3&gt;
+&lt;h3 id=&quot;change-listening-port-1&quot;&gt;Change Listening port &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;b&gt;This is just for local test purpose.&lt;/b&gt; It is useless setting After deploying as docker container, because docker automatically configure port fowarding setting.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
@@ -118,8 +118,6 @@ public class Program
   &lt;p&gt;Change the port from 80, 5000 to any number you want&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;br /&gt; reference : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls&lt;/p&gt;
-
 &lt;h3 id=&quot;run-dotnet-project-and-check-connection&quot;&gt;Run dotnet project and check connection&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 cd ~/test/test
@@ -132,8 +130,8 @@ dotnet run
 &lt;p&gt;Type http://(public ip):(your port) on your browser
 You can see a dotnet default web page. Press ctl+c on your server machine to exit the web service.&lt;/p&gt;
 
-&lt;h1 id=&quot;deploy-to-docker&quot;&gt;Deploy to Docker&lt;/h1&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0&lt;/p&gt;
+&lt;h1 id=&quot;deploy-to-docker-2&quot;&gt;Deploy to Docker &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+
 &lt;h2 id=&quot;make-dockerfile&quot;&gt;Make Dockerfile&lt;/h2&gt;
 &lt;p&gt;type “   vi ~/test/Dockerfile   “&lt;/p&gt;
 
@@ -158,8 +156,7 @@ COPY --from=build /app/test/out ./
 ENTRYPOINT [&quot;dotnet&quot;, &quot;test.dll&quot;]
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you want to use another project name, replace “test” to “Your Project Name”.
-reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1&lt;/p&gt;
+&lt;p&gt;If you want to use another project name, replace “test” to “Your Project Name”. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;run-in-a-linux-container&quot;&gt;Run in a Linux container&lt;/h2&gt;
 &lt;p&gt;Go to directory that has Dockerfile, Build and Deploy.&lt;/p&gt;
@@ -175,8 +172,38 @@ docker run -it --rm -p 5000:80 --name test_docker_aspnet test -d
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;You can connect web page by Public IP address on 5000 port
-&lt;br /&gt;reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container&lt;/p&gt;</content>
+&lt;p&gt;You can connect web page by Public IP address on 5000 port &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+    &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;</content>
 
       
       

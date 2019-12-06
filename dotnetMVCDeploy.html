@@ -234,7 +234,7 @@ dotnet new mvc
 </code></pre>
 
 <h2 id="local-test">Local Test</h2>
-<h3 id="change-listening-port">Change Listening port</h3>
+<h3 id="change-listening-port-1">Change Listening port <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h3>
 <p><b>This is just for local test purpose.</b> It is useless setting After deploying as docker container, because docker automatically configure port fowarding setting.</p>
 
 <pre><code>
@@ -265,8 +265,6 @@ public class Program
   <p>Change the port from 80, 5000 to any number you want</p>
 </blockquote>
 
-<p><br /> reference : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls</p>
-
 <h3 id="run-dotnet-project-and-check-connection">Run dotnet project and check connection</h3>
 <pre><code>
 cd ~/test/test
@@ -279,8 +277,8 @@ dotnet run
 <p>Type http://(public ip):(your port) on your browser
 You can see a dotnet default web page. Press ctl+c on your server machine to exit the web service.</p>
 
-<h1 id="deploy-to-docker">Deploy to Docker</h1>
-<p>reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0</p>
+<h1 id="deploy-to-docker-2">Deploy to Docker <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h1>
+
 <h2 id="make-dockerfile">Make Dockerfile</h2>
 <p>type “   vi ~/test/Dockerfile   “</p>
 
@@ -305,8 +303,7 @@ COPY --from=build /app/test/out ./
 ENTRYPOINT ["dotnet", "test.dll"]
 
 </code></pre>
-<p>If you want to use another project name, replace “test” to “Your Project Name”.
-reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1</p>
+<p>If you want to use another project name, replace “test” to “Your Project Name”. <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></p>
 
 <h2 id="run-in-a-linux-container">Run in a Linux container</h2>
 <p>Go to directory that has Dockerfile, Build and Deploy.</p>
@@ -322,9 +319,38 @@ docker run -it --rm -p 5000:80 --name test_docker_aspnet test -d
 
 </code></pre>
 
-<p>You can connect web page by Public IP address on 5000 port
-<br />reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container</p>
+<p>You can connect web page by Public IP address on 5000 port <sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
 
+<hr class="footnotes-sep" />
+
+<section class="footnotes">
+<ol class="footnotes-list">
+    <li id="fn1" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls">
+                <small>https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls</small>
+            </a> 
+            <a href="#fnref1" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn2" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0">
+                <small>https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0</small>
+            </a> 
+            <a href="#fnref2" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn3" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1">
+                <small>https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1</small>
+            </a> 
+            <a href="#fnref3" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn4" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container">
+                <small>https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container</small>
+            </a> 
+            <a href="#fnref4" class="footnote-backref">↩︎</a>
+    </li>
+</ol>
+</section>
 
                 </div>
             </section>

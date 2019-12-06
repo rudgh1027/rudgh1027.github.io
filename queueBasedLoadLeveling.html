@@ -43,7 +43,7 @@
     <meta property="og:site_name" content="GKArchy" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Queue Based Load Leveling" />
-    <meta property="og:description" content="Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling 1. Feature Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic. We can also check change of scales depending on request. 2. Advantages In case of service disorder, clients could send request due to queue" />
+    <meta property="og:description" content="Describe this pattern [1] 1. Feature Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic. We can also check change of scales depending on request. 2. Advantages In case of service disorder, clients could send request due to queue as buffer." />
     <meta property="og:url" content="/queueBasedLoadLeveling" />
     <meta property="og:image" content="/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/ghost" />
@@ -53,7 +53,7 @@
     <meta property="article:tag" content="Architecture" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Queue Based Load Leveling" />
-    <meta name="twitter:description" content="Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling 1. Feature Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic. We can also check change of scales depending on request. 2. Advantages In case of service disorder, clients could send request due to queue" />
+    <meta name="twitter:description" content="Describe this pattern [1] 1. Feature Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic. We can also check change of scales depending on request. 2. Advantages In case of service disorder, clients could send request due to queue as buffer." />
     <meta name="twitter:url" content="/" />
     <meta name="twitter:image" content="/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -85,7 +85,7 @@
         "@type": "WebPage",
         "@id": "/queueBasedLoadLeveling"
     },
-    "description": "Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling 1. Feature Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic. We can also check change of scales depending on request. 2. Advantages In case of service disorder, clients could send request due to queue"
+    "description": "Describe this pattern [1] 1. Feature Queue evenly transfer messages with certain speed. So that it can prevent service disorder caused by high traffic. We can also check change of scales depending on request. 2. Advantages In case of service disorder, clients could send request due to queue as buffer."
 }
     </script>
 
@@ -184,8 +184,7 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h1 id="describe-this-pattern">Describe this pattern</h1>
-<p>reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling</p>
+                    <h1 id="describe-this-pattern-1">Describe this pattern <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h1>
 
 <h2 id="1-feature">1. Feature</h2>
 <ul>
@@ -233,8 +232,7 @@ into the {body} of the default.hbs template -->
 
 <h2 id="2-practice">2. Practice</h2>
 <ul>
-  <li>It already wrote in github repository.</li>
-  <li>https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md</li>
+  <li>It already wrote in github repository. <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></li>
   <li>Before inserting data from <strong>service bus queue</strong> to <strong>Table storage</strong> using <strong>Azure function app</strong>, I inserted 6000+ data to <strong>service bus queue</strong> in advance. (It takes 30 minutes)
 <img style="width: 700px" src="/assets/images/loadLeveling_queueCount.png" /></li>
   <li>And then, running <strong>Azure function app</strong> to put data into <strong>Table storage</strong> (It takes only a few seconds)
@@ -252,31 +250,27 @@ into the {body} of the default.hbs template -->
       <li>Selecting SaaS product, Based on predictation of usage. (Example of NoSQL type)
         <ul>
           <li>Below 20,000 TPS : Azure table storage (Can be complemented by MQ)</li>
-          <li>Below 10,000,000 TPS : Azure CosmosDB (Can be complemented by MQ)</li>
-          <li>Over 10,000,000 TPS : Azure CosmosDB + Azure cache for Redis (https://azure.microsoft.com/en-us/services/cache/)</li>
+          <li>Below 10,000,000 TPS : Azure CosmosDB (Can be complemented by MQ)<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></li>
+          <li>Over 10,000,000 TPS : Azure CosmosDB + Azure cache for Redis <sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></li>
         </ul>
       </li>
       <li>Recommend Cosmos DB rather than Azure table storage(High TPS, Recovery option … etc)</li>
-      <li>reference : https://docs.microsoft.com/en-us/azure/cosmos-db/table-support</li>
     </ul>
   </li>
-  <li>Additional Example 1</li>
+  <li>Additional Example 1 <sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></li>
 </ul>
 
 <p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/images/scalable-web-app.png" /></p>
-
 <ul>
-  <li>reference : https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app</li>
   <li>
     <p>Requet backgroud process using queue and function, so that it preserves scalablity and availability.</p>
   </li>
   <li>
-    <p>Additional Example 2</p>
+    <p>Additional Example 2 <sup class="footnote-ref"><a href="#fn6" id="fnref5">[6]</a></sup></p>
 
     <p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/example-scenario/ai/media/mass-ingestion-newsfeeds-architecture.png" /></p>
 
     <ul>
-      <li>reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion</li>
       <li>passing through several APIs sequentially</li>
       <li>If certain API faces disorder or bottleneck, Queues take a role as buffer for load leveling.</li>
       <li>If you complement this system using circuit-breaker and retry pattern, availability and efficiency will be maximized.</li>
@@ -284,6 +278,50 @@ into the {body} of the default.hbs template -->
   </li>
 </ul>
 
+<hr class="footnotes-sep" />
+
+<section class="footnotes">
+<ol class="footnotes-list">
+    <li id="fn1" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling">
+                <small>https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling</small>
+            </a> 
+            <a href="#fnref1" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn2" class="footnote-item">
+            reference: <a href="https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md">
+                <small>https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md</small>
+            </a> 
+            <a href="#fnref2" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn3" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/table-support">
+                <small>https://docs.microsoft.com/en-us/azure/cosmos-db/table-support</small>
+            </a> 
+            <a href="#fnref3" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn4" class="footnote-item">
+            reference: <a href="https://azure.microsoft.com/en-us/services/cache/">
+                <small>https://azure.microsoft.com/en-us/services/cache/</small>
+            </a> 
+            <a href="#fnref4" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn5" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app">
+                <small>https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app</small>
+            </a> 
+            <a href="#fnref5" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn6" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion">
+                <small>https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion</small>
+            </a> 
+            <a href="#fnref6" class="footnote-backref">↩︎</a>
+    </li>
+</ol>
+
+
+</section>
 
                 </div>
             </section>

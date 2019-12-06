@@ -43,7 +43,7 @@
     <meta property="og:site_name" content="GKArchy" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Queue Triggered Azure Function App 2" />
-    <meta property="og:description" content="Architecture I'll use azure table storage as datastore and console application program as web app. It implements https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction So, I recommand you to follow everything in previous practice. Procedure If you complete all procedure in privious practice, comtinue following procedure. 1. Get source from github git init source #source can" />
+    <meta property="og:description" content="Architecture I'll implements this architecture using azure table storage as datastore and console application program as web app. I recommand you to follow everything in previous practice. [1] Procedure If you complete all procedure in privious practice, comtinue following procedure. 1. Get source from github git init source #source can" />
     <meta property="og:url" content="/queue-Triggered-Function_tableInsert" />
     <meta property="og:image" content="/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/ghost" />
@@ -53,7 +53,7 @@
     <meta property="article:tag" content="Cloud" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Queue Triggered Azure Function App 2" />
-    <meta name="twitter:description" content="Architecture I'll use azure table storage as datastore and console application program as web app. It implements https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction So, I recommand you to follow everything in previous practice. Procedure If you complete all procedure in privious practice, comtinue following procedure. 1. Get source from github git init source #source can" />
+    <meta name="twitter:description" content="Architecture I'll implements this architecture using azure table storage as datastore and console application program as web app. I recommand you to follow everything in previous practice. [1] Procedure If you complete all procedure in privious practice, comtinue following procedure. 1. Get source from github git init source #source can" />
     <meta name="twitter:url" content="/" />
     <meta name="twitter:image" content="/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -85,7 +85,7 @@
         "@type": "WebPage",
         "@id": "/queue-Triggered-Function_tableInsert"
     },
-    "description": "Architecture I'll use azure table storage as datastore and console application program as web app. It implements https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction So, I recommand you to follow everything in previous practice. Procedure If you complete all procedure in privious practice, comtinue following procedure. 1. Get source from github git init source #source can"
+    "description": "Architecture I'll implements this architecture using azure table storage as datastore and console application program as web app. I recommand you to follow everything in previous practice. [1] Procedure If you complete all procedure in privious practice, comtinue following procedure. 1. Get source from github git init source #source can"
 }
     </script>
 
@@ -186,9 +186,8 @@ into the {body} of the default.hbs template -->
                 <div class="kg-card-markdown">
                     <h2 id="architecture">Architecture</h2>
 <p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png" /></p>
-<p>I'll use <b>azure table storage</b> as datastore and <b>console application program</b> as web app.</p>
-<p>It implements <b>https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction</b></p>
-<p>So, I recommand you to follow everything in previous practice.</p>
+<p>I'll implements this architecture using <b>azure table storage</b> as datastore and <b>console application program</b> as web app.</p>
+<p>I recommand you to follow everything in previous practice. <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
 
 <h1 id="procedure">Procedure</h1>
 <p>If you complete all procedure in privious practice, comtinue following procedure.</p>
@@ -253,7 +252,8 @@ az storage table create --name {yourTableStorageName} --account-name {yourStorag
 
 </code></pre>
 
-<h2 id="6-editting-functionappnamecs-source">6. Editting {FunctionAppName}.cs Source</h2>
+<h2 id="6-editting-functionappnamecs-source---2">6. Editting {FunctionAppName}.cs Source   <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></h2>
+
 <p>Open ~/source/azure/002.queueTriggeredFunction_tableInsert/(projectname).cs</p>
 <p>Now our codes are</p>
 
@@ -309,7 +309,6 @@ namespace funcgkim0012
 }
 
 </code></pre>
-<p><small>reference: https://docs.microsoft.com/ko-kr/azure/azure-functions/functions-bindings-storage-table</small></p>
 
 <h2 id="7-import-nuget-package">7. Import Nuget Package</h2>
 <pre><code>
@@ -335,9 +334,8 @@ func start --build
 Value cannot be null.
 Parameter name: provider
 </code></pre>
-<p>Then you have to use other package version of <b>Microsoft.Azure.WebJobs.Extensions.Storage</b>.</p>
-<p>This error was occured because visual studio code and package version didn't match.</p>
-<p>I recommand 3.0.4 version</p>
+<p>Then you have to use other extension version of azuer Storage. This error was occured because visual studio code and package version didn't match.</p>
+<p>I recommand 3.0.4 version of <b>Microsoft.Azure.WebJobs.Extensions.Storage</b></p>
 
 <h3 id="81-test_1">8.1 Test_1</h3>
 <p>Open another tab at your browser and open additional terminal in azure. And then type..</p>
@@ -374,6 +372,26 @@ func azure functionapp publish {FunctionAppName}
 dotnet run
 
 </code></pre>
+
+<hr class="footnotes-sep" />
+
+<section class="footnotes">
+<ol class="footnotes-list">
+    <li id="fn1" class="footnote-item">
+            reference: <a href="https://rudgh1027.github.io/queue-Triggered-Function">
+                <small>https://rudgh1027.github.io/queue-Triggered-Function</small>
+            </a> 
+            <a href="#fnref1" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn2" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-table#input---c-example---one-entity">
+                <small>https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-table#input---c-example---one-entity</small>
+            </a> 
+            <a href="#fnref2" class="footnote-backref">↩︎</a>
+    </li>
+</ol>
+
+</section>
 
                 </div>
             </section>

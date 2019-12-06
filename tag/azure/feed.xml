@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/azure/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-06T17:30:05+09:00</updated>
+  <updated>2019-12-06T19:28:17+09:00</updated>
   <id>/tag/azure/feed.xml</id>
 
   
@@ -37,9 +37,8 @@
       <published>2019-11-12T19:18:00+09:00</published>
       <updated>2019-11-12T19:18:00+09:00</updated>
       <id>/CICD-pipeline-for-container-based-workloads</id>
-      <content type="html" xml:base="/CICD-pipeline-for-container-based-workloads">&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks
-&lt;br /&gt;
+      <content type="html" xml:base="/CICD-pipeline-for-container-based-workloads">&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;br /&gt;
 &lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;feature&quot;&gt;Feature&lt;/h2&gt;
@@ -60,7 +59,7 @@
     &lt;p&gt;Click azure cloud shell button on the top of the web page.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;After loading Azure Cloud Shell, Type &lt;code&gt;az ad sp create-for-rbac --name myDevOpsScenario&lt;/code&gt;
-&lt;br /&gt; ※ If it says you don’t have sufficiant privilige, ask your owner of subscription to give you &lt;b&gt;Owner&lt;/b&gt; role or custom role that has &lt;b&gt;Microsoft.Authorization/roleAssignments/write&lt;/b&gt;. Every predefined role don’t have that permition. (reference : https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles )
+&lt;br /&gt; ※ If it says you don’t have sufficiant privilige, ask your owner of subscription to give you &lt;b&gt;Owner&lt;/b&gt; role or custom role that has &lt;b&gt;Microsoft.Authorization/roleAssignments/write&lt;/b&gt;. Every predefined role don’t have that permition. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.spinfo.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Make SSH Key : Type &lt;code&gt;ssh-keygen -t rsa -b 2048&lt;/code&gt; on your cloud shell. Terminal may ask you key name and passphrase. Just type &lt;b&gt;Enter&lt;/b&gt; key.&lt;/p&gt;
@@ -97,8 +96,7 @@
   &lt;/li&gt;
   &lt;li&gt;Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/unlock_jenkins.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. &lt;code&gt;ssh (yourID)@(Jenkins Public IP)&lt;/code&gt;. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type &lt;code&gt;sudo cat /var/lib/jenkins/secrets/initialAdminPassword&lt;/code&gt;
-※ Reference : https://docs.microsoft.com/ko-kr/azure/jenkins/install-jenkins-solution-template&lt;/li&gt;
+  &lt;li&gt;Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. &lt;code&gt;ssh (yourID)@(Jenkins Public IP)&lt;/code&gt;. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type &lt;code&gt;sudo cat /var/lib/jenkins/secrets/initialAdminPassword&lt;/code&gt; &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
   &lt;li&gt;Create initial admin account and Install suggested plugins. Now, you can see Jenkins Dashboard.&lt;/li&gt;
   &lt;li&gt;In main page of jenkins console, click &lt;b&gt;Hello World Build &amp;amp; Deploy&lt;/b&gt; link. Then you can see deployed pipeline.
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.jenkins_pipeline.png&quot; /&gt;&lt;/li&gt;
@@ -216,9 +214,9 @@ az acr login --name $acrname
 
 &lt;h3 id=&quot;4-make-docker-web-application&quot;&gt;4) Make docker web application&lt;/h3&gt;
 &lt;p&gt;In this step, I’ll use ASP.NET MVC WEB image.
-Look at the post : https://github.com/rudgh1027/cloud/blob/master/azure/docker/002.dotnetMVCDeploy.md&lt;/p&gt;
+Look at the post &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;5-push-to-the-acr&quot;&gt;5) Push to the ACR&lt;/h3&gt;
+&lt;h3 id=&quot;5-push-to-the-acr-5&quot;&gt;5) Push to the ACR &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn5&quot; id=&quot;fnref5&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 &lt;p&gt;After done precess that written in the above post&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 loginsvr=$(az acr list --resource-group ((your resource group name)) | jq -r &quot;.[].loginServer&quot;)
@@ -234,17 +232,14 @@ az acr repository list --name $acrname --output table
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;br /&gt;reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr&lt;/p&gt;
-
-&lt;h2 id=&quot;5-deploy-container-to-aks&quot;&gt;5. Deploy container to AKS&lt;/h2&gt;
+&lt;h2 id=&quot;5-deploy-container-to-aks-6&quot;&gt;5. Deploy container to AKS &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn6&quot; id=&quot;fnref6&quot;&gt;[6]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;h3 id=&quot;1-install-the-kubernetes-cli&quot;&gt;1) Install the kubernetes cli&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 az aks install-cli
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli&lt;/p&gt;
 
-&lt;h3 id=&quot;2-install-the-kubernetes-cli&quot;&gt;2) Install the kubernetes cli&lt;/h3&gt;
+&lt;h3 id=&quot;2-install-the-kubernetes-cli-7&quot;&gt;2) Install the kubernetes cli &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn7&quot; id=&quot;fnref7&quot;&gt;[7]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 aksname=$(az aks list | jq -r &quot;.[].name&quot;)
 az aks get-credentials  --resource-group ((your resource group name)) --name $aksname
@@ -253,7 +248,6 @@ az aks get-credentials  --resource-group ((your resource group name)) --name $ak
 kubectl get nodes
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#connect-to-cluster-using-kubectl&lt;/p&gt;
 
 &lt;h3 id=&quot;3-make-deployment-yaml-file&quot;&gt;3) Make deployment yaml file&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
@@ -308,8 +302,62 @@ kubectl get deployment
   
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;6-continueously-manage-by-jenkins-and-github--see-the-below-reference&quot;&gt;6. Continueously manage by Jenkins and github : See the below reference&lt;/h2&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment&lt;/p&gt;</content>
+&lt;h2 id=&quot;6-continueously-manage-by-jenkins-and-github--see-the-below-reference-8&quot;&gt;6. Continueously manage by Jenkins and github : See the below reference &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn8&quot; id=&quot;fnref8&quot;&gt;[8]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+    &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/ko-kr/azure/jenkins/install-jenkins-solution-template&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/ko-kr/azure/jenkins/install-jenkins-solution-template&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://rudgh1027.github.io/dotnetMVCDeploy&quot;&gt;
+                &lt;small&gt;https://rudgh1027.github.io/dotnetMVCDeploy&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn5&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot; https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr&quot;&gt;
+                &lt;small&gt; https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref5&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn6&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref6&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn7&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#connect-to-cluster-using-kubectl&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#connect-to-cluster-using-kubectl&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref7&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn8&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref8&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;</content>
 
       
       
@@ -332,7 +380,7 @@ kubectl get deployment
       
 
       
-        <summary type="html">Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks</summary>
+        <summary type="html">Describe this pattern [1]</summary>
       
 
       
@@ -345,8 +393,7 @@ kubectl get deployment
       <published>2019-10-16T19:18:00+09:00</published>
       <updated>2019-10-16T19:18:00+09:00</updated>
       <id>/queueBasedLoadLeveling</id>
-      <content type="html" xml:base="/queueBasedLoadLeveling">&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
-&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&lt;/p&gt;
+      <content type="html" xml:base="/queueBasedLoadLeveling">&lt;h1 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;
 
 &lt;h2 id=&quot;1-feature&quot;&gt;1. Feature&lt;/h2&gt;
 &lt;ul&gt;
@@ -394,8 +441,7 @@ kubectl get deployment
 
 &lt;h2 id=&quot;2-practice&quot;&gt;2. Practice&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;It already wrote in github repository.&lt;/li&gt;
-  &lt;li&gt;https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md&lt;/li&gt;
+  &lt;li&gt;It already wrote in github repository. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
   &lt;li&gt;Before inserting data from &lt;strong&gt;service bus queue&lt;/strong&gt; to &lt;strong&gt;Table storage&lt;/strong&gt; using &lt;strong&gt;Azure function app&lt;/strong&gt;, I inserted 6000+ data to &lt;strong&gt;service bus queue&lt;/strong&gt; in advance. (It takes 30 minutes)
 &lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_queueCount.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;And then, running &lt;strong&gt;Azure function app&lt;/strong&gt; to put data into &lt;strong&gt;Table storage&lt;/strong&gt; (It takes only a few seconds)
@@ -413,37 +459,78 @@ kubectl get deployment
       &lt;li&gt;Selecting SaaS product, Based on predictation of usage. (Example of NoSQL type)
         &lt;ul&gt;
           &lt;li&gt;Below 20,000 TPS : Azure table storage (Can be complemented by MQ)&lt;/li&gt;
-          &lt;li&gt;Below 10,000,000 TPS : Azure CosmosDB (Can be complemented by MQ)&lt;/li&gt;
-          &lt;li&gt;Over 10,000,000 TPS : Azure CosmosDB + Azure cache for Redis (https://azure.microsoft.com/en-us/services/cache/)&lt;/li&gt;
+          &lt;li&gt;Below 10,000,000 TPS : Azure CosmosDB (Can be complemented by MQ)&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+          &lt;li&gt;Over 10,000,000 TPS : Azure CosmosDB + Azure cache for Redis &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;Recommend Cosmos DB rather than Azure table storage(High TPS, Recovery option … etc)&lt;/li&gt;
-      &lt;li&gt;reference : https://docs.microsoft.com/en-us/azure/cosmos-db/table-support&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;Additional Example 1&lt;/li&gt;
+  &lt;li&gt;Additional Example 1 &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn5&quot; id=&quot;fnref5&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/images/scalable-web-app.png&quot; /&gt;&lt;/p&gt;
-
 &lt;ul&gt;
-  &lt;li&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Requet backgroud process using queue and function, so that it preserves scalablity and availability.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Additional Example 2&lt;/p&gt;
+    &lt;p&gt;Additional Example 2 &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn6&quot; id=&quot;fnref5&quot;&gt;[6]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
     &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/example-scenario/ai/media/mass-ingestion-newsfeeds-architecture.png&quot; /&gt;&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion&lt;/li&gt;
       &lt;li&gt;passing through several APIs sequentially&lt;/li&gt;
       &lt;li&gt;If certain API faces disorder or bottleneck, Queues take a role as buffer for load leveling.&lt;/li&gt;
       &lt;li&gt;If you complement this system using circuit-breaker and retry pattern, availability and efficiency will be maximized.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content>
+&lt;/ul&gt;
+
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+    &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md&quot;&gt;
+                &lt;small&gt;https://github.com/rudgh1027/cloud/blob/master/azure/002.queueTriggeredFunction_tableInsert/README.md&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/cosmos-db/table-support&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/cosmos-db/table-support&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://azure.microsoft.com/en-us/services/cache/&quot;&gt;
+                &lt;small&gt;https://azure.microsoft.com/en-us/services/cache/&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn5&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref5&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn6&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/ai/newsfeed-ingestion&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref6&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;/section&gt;</content>
 
       
       
@@ -466,7 +553,7 @@ kubectl get deployment
       
 
       
-        <summary type="html">Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling</summary>
+        <summary type="html">Describe this pattern [1]</summary>
       
 
       
@@ -481,9 +568,8 @@ kubectl get deployment
       <id>/queue-Triggered-Function_tableInsert</id>
       <content type="html" xml:base="/queue-Triggered-Function_tableInsert">&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
 &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;I'll use &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
-&lt;p&gt;It implements &lt;b&gt;https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction&lt;/b&gt;&lt;/p&gt;
-&lt;p&gt;So, I recommand you to follow everything in previous practice.&lt;/p&gt;
+&lt;p&gt;I'll implements this architecture using &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
+&lt;p&gt;I recommand you to follow everything in previous practice. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
 &lt;p&gt;If you complete all procedure in privious practice, comtinue following procedure.&lt;/p&gt;
@@ -548,7 +634,8 @@ az storage table create --name {yourTableStorageName} --account-name {yourStorag
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;6-editting-functionappnamecs-source&quot;&gt;6. Editting {FunctionAppName}.cs Source&lt;/h2&gt;
+&lt;h2 id=&quot;6-editting-functionappnamecs-source---2&quot;&gt;6. Editting {FunctionAppName}.cs Source   &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+
 &lt;p&gt;Open ~/source/azure/002.queueTriggeredFunction_tableInsert/(projectname).cs&lt;/p&gt;
 &lt;p&gt;Now our codes are&lt;/p&gt;
 
@@ -604,7 +691,6 @@ namespace funcgkim0012
 }
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;small&gt;reference: https://docs.microsoft.com/ko-kr/azure/azure-functions/functions-bindings-storage-table&lt;/small&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;7-import-nuget-package&quot;&gt;7. Import Nuget Package&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;
@@ -630,9 +716,8 @@ func start --build
 Value cannot be null.
 Parameter name: provider
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then you have to use other package version of &lt;b&gt;Microsoft.Azure.WebJobs.Extensions.Storage&lt;/b&gt;.&lt;/p&gt;
-&lt;p&gt;This error was occured because visual studio code and package version didn't match.&lt;/p&gt;
-&lt;p&gt;I recommand 3.0.4 version&lt;/p&gt;
+&lt;p&gt;Then you have to use other extension version of azuer Storage. This error was occured because visual studio code and package version didn't match.&lt;/p&gt;
+&lt;p&gt;I recommand 3.0.4 version of &lt;b&gt;Microsoft.Azure.WebJobs.Extensions.Storage&lt;/b&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;81-test_1&quot;&gt;8.1 Test_1&lt;/h3&gt;
 &lt;p&gt;Open another tab at your browser and open additional terminal in azure. And then type..&lt;/p&gt;
@@ -668,7 +753,27 @@ func azure functionapp publish {FunctionAppName}
 ## bash
 dotnet run
 
-&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+    &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://rudgh1027.github.io/queue-Triggered-Function&quot;&gt;
+                &lt;small&gt;https://rudgh1027.github.io/queue-Triggered-Function&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-table#input---c-example---one-entity&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-table#input---c-example---one-entity&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/section&gt;</content>
 
       
       
@@ -691,7 +796,7 @@ dotnet run
       
 
       
-        <summary type="html">Architecture I'll use azure table storage as datastore and console application program as web app. It implements https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction So, I recommand you to follow everything in previous practice.</summary>
+        <summary type="html">Architecture I'll implements this architecture using azure table storage as datastore and console application program as web app. I recommand you to follow everything in previous practice. [1]</summary>
       
 
       
@@ -873,118 +978,6 @@ dotnet run
 
       
         <summary type="html">Architecture We are going to make dotnet console application as task, azure function app as service.</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Asynchronous Messaging Pattern 1</title>
-      <link href="/welcome-to-asynchronous-messaging_1" rel="alternate" type="text/html" title="Asynchronous Messaging Pattern 1" />
-      <published>2019-10-02T19:00:00+09:00</published>
-      <updated>2019-10-02T19:00:00+09:00</updated>
-      <id>/welcome-to-asynchronous-messaging_1</id>
-      <content type="html" xml:base="/welcome-to-asynchronous-messaging_1">&lt;h3&gt;Intro&lt;/h3&gt;
-&lt;p&gt;Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.&lt;/p&gt;
-
-&lt;h3&gt;Feature and benefits&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
-&lt;ul&gt;
-    &lt;li&gt;There are no direct connections between programs.&lt;/li&gt;
-    &lt;li&gt;Communication between programs can be independent of time.&lt;/li&gt;
-    &lt;li&gt;Work can be carried out by small, self-contained programs.&lt;/li&gt;
-    &lt;li&gt;Communication can be driven by events.&lt;/li&gt;
-    &lt;li&gt;Applications can assign a priority to a message.&lt;/li&gt;
-    &lt;li&gt;Security.&lt;/li&gt;
-    &lt;li&gt;Data integrity.&lt;/li&gt;
-    &lt;li&gt;Recovery support.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Basic Message Queuing Patterns&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
-&lt;ol&gt;
-    &lt;li&gt;One-way messaging&lt;/li&gt;
-    &lt;ul&gt;
-        &lt;li&gt;General pattern of messaging queue. Sender just posts a meesage and receiver just retrieve it to process some logic.&lt;/li&gt;
-        &lt;li&gt;Reference Architecture&lt;sub&gt;(azure)&lt;/sub&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
-        &lt;img src=&quot;/assets/images/scalable-web-app.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
-        &lt;p&gt;- improving scalability and performance in an Azure App Service web application&lt;br /&gt;- Go to link of no [3]. We can use deployment script generating azure resource and application code on github reposipory.&lt;/p&gt;
-        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;li&gt;Request/response messaging&lt;/li&gt;
-    &lt;ul&gt;
-        &lt;li&gt;Sender posts a message to a queue and wait for a response from the receiver&lt;/li&gt;
-        &lt;li&gt;Confirming whether messages have been proccessed(reliablity)&lt;/li&gt;
-        &lt;li&gt;Need to separate communication channel as queue&lt;/li&gt;
-        &lt;img src=&quot;/assets/images/request-response-messaging.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
-        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;li&gt;Broadcast messaging&lt;/li&gt;
-    &lt;ul&gt;
-        &lt;li&gt; sender posts a message to a queue, and multiple receivers can read a copy&lt;/li&gt;
-        &lt;li&gt;It is used to implement a publisher/subscriber model&lt;/li&gt;
-        &lt;li&gt;Reference Architecture&lt;sub&gt;(azure)&lt;/sub&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
-        &lt;img src=&quot;/assets/images/enterprise-integration-queues-events.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
-        &lt;p&gt;- Asynchronous communication using a message broker&lt;br /&gt;- An application or service can publish events, and any interested subscribers will be notified.&lt;/p&gt;
-        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/ol&gt;
-
-&lt;hr class=&quot;footnotes-sep&quot; /&gt;
-
-&lt;section class=&quot;footnotes&quot;&gt;
-&lt;ol class=&quot;footnotes-list&quot;&gt;
-    &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;
-            reference: &lt;a href=&quot;https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.5.0/com.ibm.mq.pro.doc/q002630_.htm&quot;&gt;
-                &lt;small&gt;https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.5.0/com.ibm.mq.pro.doc/q002630_.htm&lt;/small&gt;
-            &lt;/a&gt; 
-            &lt;a href=&quot;#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;
-            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589781(v=pandp.10)?redirectedfrom=MSDN&quot;&gt;
-                &lt;small&gt;https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589781(v=pandp.10)?redirectedfrom=MSDN&lt;/small&gt;
-            &lt;/a&gt; 
-            &lt;a href=&quot;#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;
-            reference: &lt;a href=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&quot;&gt;
-                &lt;small&gt;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&lt;/small&gt;
-            &lt;/a&gt; 
-            &lt;a href=&quot;#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;
-            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/enterprise-integration/queues-events&quot;&gt;
-                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/enterprise-integration/queues-events&lt;/small&gt;
-            &lt;/a&gt; 
-            &lt;a href=&quot;#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
-    &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;/section&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>gkarchy</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="architecture" />
-      
-        <category term="cloud" />
-      
-        <category term="azure" />
-      
-
-      
-        <summary type="html">Intro Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.</summary>
       
 
       
