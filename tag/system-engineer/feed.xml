@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="/tag/system-engineer/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="/" rel="alternate" type="text/html" />
+  <updated>2019-12-06T14:04:32+09:00</updated>
+  <id>/tag/system-engineer/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">GKArchy | </title>
+  
+
+  
+    <subtitle>The IT Service Technology Blog</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Welcome to System Engineer</title>
+      <link href="/welcome-to-systemengineer" rel="alternate" type="text/html" title="Welcome to System Engineer" />
+      <published>2019-09-29T19:18:00+09:00</published>
+      <updated>2019-09-29T19:18:00+09:00</updated>
+      <id>/welcome-to-systemengineer</id>
+      <content type="html" xml:base="/welcome-to-systemengineer">&lt;p&gt;This tab is about my work as system engineer.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="system-engineer" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about my work as system engineer.</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

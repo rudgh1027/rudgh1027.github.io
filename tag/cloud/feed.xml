@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="/tag/cloud/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="/" rel="alternate" type="text/html" />
+  <updated>2019-12-06T14:04:32+09:00</updated>
+  <id>/tag/cloud/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">GKArchy | </title>
+  
+
+  
+    <subtitle>The IT Service Technology Blog</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Queue Triggered Azure Function App 2</title>
+      <link href="/queue-Triggered-Function_tableInsert" rel="alternate" type="text/html" title="Queue Triggered Azure Function App 2" />
+      <published>2019-10-14T19:18:00+09:00</published>
+      <updated>2019-10-14T19:18:00+09:00</updated>
+      <id>/queue-Triggered-Function_tableInsert</id>
+      <content type="html" xml:base="/queue-Triggered-Function_tableInsert">&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;I'll use &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
+&lt;p&gt;It implements &lt;b&gt;https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;So, I recommand you to follow everything in previous practice.&lt;/p&gt;
+
+&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+&lt;p&gt;If you complete all procedure in privious practice, comtinue following procedure.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-get-source-from-github&quot;&gt;1. Get source from github&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+git init source           #source can be replaced with other directory name you want
+cd source
+git remote add -f origin https://github.com/rudgh1027/cloud.git
+git config core.sparseCheckout true
+echo &quot;azure/002.queueTriggeredFunction_tableInsert/*&quot; &amp;gt;&amp;gt; .git/info/sparse-checkout
+git pull origin master
+cd azure/002.queueTriggeredFunction_tableInsert/
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;2-editting-parameter-name&quot;&gt;2. Editting Parameter Name&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## complete names of resources
+vi exported.dat
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;3-deploy-service-bus-queue-and-azure-function-app&quot;&gt;3. Deploy Service Bus Queue and Azure Function App&lt;/h2&gt;
+&lt;p&gt;Just run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+## deploy queue
+./deployq.sh
+## deploy function app
+./deployFunc.sh
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;4-make-project&quot;&gt;4. Make Project&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+./makeProj.sh
+## Select a worker runtime:
+## 1. dotnet
+## 2. node
+## 3. python
+## 4. powershell (preview)
+## Choose option: 1            Select 1
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;5-deploy-table-storage&quot;&gt;5. Deploy Table Storage&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;
+az storage table create --name {yourTableStorageName} --account-name {yourStorageAccountName}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can reuse storage account already created in previous practice.&lt;/p&gt;
+
+&lt;p&gt;Determine your table storage name and replace {yourTableStorageName} with that.&lt;/p&gt;
+
+&lt;p&gt;output&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+{
+  &quot;created&quot;: true
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;6-editting-functionappnamecs-source&quot;&gt;6. Editting {FunctionAppName}.cs Source&lt;/h2&gt;
+&lt;p&gt;Open ~/source/azure/002.queueTriggeredFunction_tableInsert/(projectname).cs&lt;/p&gt;
+&lt;p&gt;Now our codes are&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+using System;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
+
+namespace funcgkim0012
+{
+    public static class funcgkim0012
+    {
+        [FunctionName(&quot;funcgkim0012&quot;)]
+        public static void Run([ServiceBusTrigger(&quot;yourqueuename&quot;, Connection = &quot;MyServiceBusConnection&quot;)]string myQueueItem, ILogger log)
+        {
+            log.LogInformation($&quot;C# ServiceBus queue trigger function processed message: {myQueueItem}&quot;);
+        }
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should add some codes like this.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+using System;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Microsoft.Azure.WebJobs.Extensions.Storage;
+
+namespace funcgkim0012
+{
+    public class MyHealthData
+    {
+        public string PartitionKey { get; set; }
+        public string RowKey { get; set; }
+        public int heat { get; set; }
+        public int heartbaet { get; set; }
+    }
+    public static class funcgkim0012
+    {
+        [FunctionName(&quot;funcgkim0012&quot;)]
+        [return: Table(&quot;gkHealthCareData&quot;)]
+        public static MyHealthData Run([ServiceBusTrigger(&quot;q-gkim-02&quot;, Connection = &quot;MyServiceBusConnection&quot;)]string myQueueItem, ILogger log)
+        {
+            MyHealthData md = JsonConvert.DeserializeObject&amp;lt;MyHealthData&amp;gt;(myQueueItem);
+            log.LogInformation($&quot;C# ServiceBus queue trigger function processed message: {myQueueItem}&quot;);
+            return md;
+        }
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;small&gt;reference: https://docs.microsoft.com/ko-kr/azure/azure-functions/functions-bindings-storage-table&lt;/small&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;7-import-nuget-package&quot;&gt;7. Import Nuget Package&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## In your azure cloud shell, cd ..../{yourfunctionapp}/
+## Import package of webjobs storage extension
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage --version 3.0.4
+## Import package of Json
+dotnet add package Newtonsoft.Json --version 11.0.2
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;8-local-build&quot;&gt;8. Local Build&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## bash
+func start --build
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If error occur saying&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+[10/8/19 8:44:12 AM] A host error has occurred
+[10/8/19 8:44:12 AM] System.Private.CoreLib: Could not load file or assembly 'Microsoft.Azure.WebJobs.Extensions.Storage, Version=3.0.8.0, Culture=neutral, PublicKeyToken=.........'. Could not find or load a specific file. (Exception from HRESULT: 0x80131621). System.Private.CoreLib: Could not load file or assembly 'Microsoft.Azure.WebJobs.Extensions.Storage, Version=3.0.8.0, Culture=neutral, PublicKeyToken=........'.
+[10/8/19 8:44:12 AM] Stopping JobHost
+Value cannot be null.
+Parameter name: provider
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then you have to use other package version of &lt;b&gt;Microsoft.Azure.WebJobs.Extensions.Storage&lt;/b&gt;.&lt;/p&gt;
+&lt;p&gt;This error was occured because visual studio code and package version didn't match.&lt;/p&gt;
+&lt;p&gt;I recommand 3.0.4 version&lt;/p&gt;
+
+&lt;h3 id=&quot;81-test_1&quot;&gt;8.1 Test_1&lt;/h3&gt;
+&lt;p&gt;Open another tab at your browser and open additional terminal in azure. And then type..&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd ~/source/azure/001.queueTriggeredFunction/sender/&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Open Program.cs&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+...
+      static string ServiceBusConnectionString=&quot;....&quot;;
+      static string QueueName=&quot;...&quot;; 
+...
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Insert your queue name and connectionString.
+Save and run “dotnet run”&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+## bash
+dotnet run
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In your terminal running azure function app project, you can see a message log.&lt;/p&gt;
+
+&lt;h2 id=&quot;9-deploy-to-azure-function&quot;&gt;9. Deploy To Azure Function&lt;/h2&gt;
+&lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/{FunctionAppName}”&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+## bash
+func azure functionapp publish {FunctionAppName}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;91-test_2&quot;&gt;9.1 Test_2&lt;/h3&gt;
+&lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/sender/”&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+## bash
+dotnet run
+
+&lt;/code&gt;&lt;/pre&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="cloud" />
+      
+        <category term="azure" />
+      
+
+      
+        <summary type="html">Architecture I'll use azure table storage as datastore and console application program as web app. It implements https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction So, I recommand you to follow everything in previous practice.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Queue Triggered Azure Function App 1</title>
+      <link href="/queue-Triggered-Function" rel="alternate" type="text/html" title="Queue Triggered Azure Function App 1" />
+      <published>2019-10-09T19:18:00+09:00</published>
+      <updated>2019-10-09T19:18:00+09:00</updated>
+      <id>/queue-Triggered-Function</id>
+      <content type="html" xml:base="/queue-Triggered-Function">&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;&lt;img style=&quot;width: 700px;&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-pattern.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We are going to make &lt;b&gt;dotnet console application as task&lt;/b&gt;, &lt;b&gt;azure function app as service&lt;/b&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+&lt;p&gt;This pratice is optimized for &lt;b&gt;bash shell and azure cli in Azure Cloud Shell.&lt;/b&gt; Go to azure portal and run azure cloud shell&lt;/p&gt;
+
+&lt;h2 id=&quot;1-get-source-from-github&quot;&gt;1. Get source from github&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+git init {source}           #{source} can be replaced with other directory name you want
+cd source
+git remote add -f origin https://github.com/rudgh1027/cloud.git
+git config core.sparseCheckout true
+echo &quot;azure/001.queueTriggeredFunction/*&quot; &amp;gt;&amp;gt; .git/info/sparse-checkout
+git pull origin master
+cd azure/001.queueTriggeredFunction/
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;2-editting-parameter-name&quot;&gt;2. Editting Parameter Name&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## complete names of resources
+vi exported.dat
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;3-deploy-service-bus-queue-and-azure-function-app&quot;&gt;3. Deploy Service Bus Queue and Azure Function App&lt;/h2&gt;
+&lt;p&gt;Just run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+## deploy queue
+./deployq.sh
+## deploy function app
+./deployFunc.sh
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;4-make-project&quot;&gt;4. Make Project&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+./makeProj.sh
+## Select a worker runtime:
+## 1. dotnet
+## 2. node
+## 3. python
+## 4. powershell (preview)
+## Choose option: 1            Select 1
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;5-editting-functionappnamecs-source&quot;&gt;5. Editting {FunctionAppName}.cs Source&lt;/h2&gt;
+&lt;p&gt;Now we can see Visual Studio code edittor.
+Open ~/source/azure/001.queueTriggeredFunction/(projectname).cs&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+using System;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
+
+namespace funcgkim0012
+{
+    public static class funcgkim0012
+    {
+        [FunctionName(&quot;funcgkim0012&quot;)]
+        public static void Run([ServiceBusTrigger(&quot;myqueue&quot;, Connection = &quot;&quot;)]string myQueueItem, ILogger log)
+        {
+            log.LogInformation($&quot;C# ServiceBus queue trigger function processed message: {myQueueItem}&quot;);
+        }
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Replace myqueue with your queue name in your sesrvice bus namespace.
+In my code, I already define connectionString name, &lt;b&gt;MyServiceBusConnection&lt;/b&gt;.
+So replace &quot;&quot; with &quot;MyServiceBusConnection&quot;.&lt;/p&gt;
+&lt;p&gt;Now our code is&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+using System;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
+using Microsoft.Azure.WebJobs.Extensions.Storage;
+
+namespace funcgkim0012
+{
+    public static class funcgkim0012
+    {
+        [FunctionName(&quot;funcgkim0012&quot;)]
+        public static void Run([ServiceBusTrigger(&quot;yourqueuename&quot;, Connection = &quot;MyServiceBusConnection&quot;)]string myQueueItem, ILogger log)
+        {
+            log.LogInformation($&quot;C# ServiceBus queue trigger function processed message: {myQueueItem}&quot;);
+        }
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;6-import-nuget-package&quot;&gt;6. Import Nuget Package&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## In your azure cloud shell, cd ..../{yourfunctionapp}/
+## Import package of webjobs storage extension
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage --version 3.0.4
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;7-local-build&quot;&gt;7. Local Build&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## bash
+func start --build
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;71-test_1&quot;&gt;7.1 Test_1&lt;/h3&gt;
+&lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/sender/”&lt;/p&gt;
+&lt;p&gt;Open Program.cs and insert your queue name and connectionString.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+...
+      static string ServiceBusConnectionString=&quot;....&quot;;
+      static string QueueName=&quot;...&quot;; 
+...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Save and run “dotnet run”&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+## bash
+dotnet run
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In your terminal running azure function app project, you can see a message log.&lt;/p&gt;
+
+&lt;h2 id=&quot;8-deploy-to-azure-function&quot;&gt;8. Deploy To Azure Function&lt;/h2&gt;
+&lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/{FunctionAppName}”&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+## bash
+func azure functionapp publish {FunctionAppName}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;81-test_2&quot;&gt;8.1 Test_2&lt;/h3&gt;
+&lt;p&gt;Go to “~/source/azure/001.queueTriggeredFunction/sender/”&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+## bash
+dotnet run
+
+&lt;/code&gt;&lt;/pre&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="cloud" />
+      
+        <category term="azure" />
+      
+
+      
+        <summary type="html">Architecture We are going to make dotnet console application as task, azure function app as service.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Asynchronous Messaging Pattern 1</title>
+      <link href="/welcome-to-asynchronous-messaging_1" rel="alternate" type="text/html" title="Asynchronous Messaging Pattern 1" />
+      <published>2019-10-02T19:00:00+09:00</published>
+      <updated>2019-10-02T19:00:00+09:00</updated>
+      <id>/welcome-to-asynchronous-messaging_1</id>
+      <content type="html" xml:base="/welcome-to-asynchronous-messaging_1">&lt;h3&gt;Intro&lt;/h3&gt;
+&lt;p&gt;Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.&lt;/p&gt;
+
+&lt;h3&gt;Feature and benefits&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;ul&gt;
+    &lt;li&gt;There are no direct connections between programs.&lt;/li&gt;
+    &lt;li&gt;Communication between programs can be independent of time.&lt;/li&gt;
+    &lt;li&gt;Work can be carried out by small, self-contained programs.&lt;/li&gt;
+    &lt;li&gt;Communication can be driven by events.&lt;/li&gt;
+    &lt;li&gt;Applications can assign a priority to a message.&lt;/li&gt;
+    &lt;li&gt;Security.&lt;/li&gt;
+    &lt;li&gt;Data integrity.&lt;/li&gt;
+    &lt;li&gt;Recovery support.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Basic Message Queuing Patterns&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;ol&gt;
+    &lt;li&gt;One-way messaging&lt;/li&gt;
+    &lt;ul&gt;
+        &lt;li&gt;General pattern of messaging queue. Sender just posts a meesage and receiver just retrieve it to process some logic.&lt;/li&gt;
+        &lt;li&gt;Reference Architecture&lt;sub&gt;(azure)&lt;/sub&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+        &lt;img src=&quot;/assets/images/scalable-web-app.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
+        &lt;p&gt;- improving scalability and performance in an Azure App Service web application&lt;br /&gt;- Go to link of no [3]. We can use deployment script generating azure resource and application code on github reposipory.&lt;/p&gt;
+        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;li&gt;Request/response messaging&lt;/li&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Sender posts a message to a queue and wait for a response from the receiver&lt;/li&gt;
+        &lt;li&gt;Confirming whether messages have been proccessed(reliablity)&lt;/li&gt;
+        &lt;li&gt;Need to separate communication channel as queue&lt;/li&gt;
+        &lt;img src=&quot;/assets/images/request-response-messaging.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
+        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;li&gt;Broadcast messaging&lt;/li&gt;
+    &lt;ul&gt;
+        &lt;li&gt; sender posts a message to a queue, and multiple receivers can read a copy&lt;/li&gt;
+        &lt;li&gt;It is used to implement a publisher/subscriber model&lt;/li&gt;
+        &lt;li&gt;Reference Architecture&lt;sub&gt;(azure)&lt;/sub&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+        &lt;img src=&quot;/assets/images/enterprise-integration-queues-events.png&quot; alt=&quot;Test Image&quot; style=&quot;width: 100% !important;&quot; /&gt;
+        &lt;p&gt;- Asynchronous communication using a message broker&lt;br /&gt;- An application or service can publish events, and any interested subscribers will be notified.&lt;/p&gt;
+        &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;mark&gt;Self practice&lt;/mark&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/ol&gt;
+
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+    &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.5.0/com.ibm.mq.pro.doc/q002630_.htm&quot;&gt;
+                &lt;small&gt;https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.5.0/com.ibm.mq.pro.doc/q002630_.htm&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589781(v=pandp.10)?redirectedfrom=MSDN&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589781(v=pandp.10)?redirectedfrom=MSDN&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;
+            reference: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/enterprise-integration/queues-events&quot;&gt;
+                &lt;small&gt;https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/enterprise-integration/queues-events&lt;/small&gt;
+            &lt;/a&gt; 
+            &lt;a href=&quot;#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/section&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+        <category term="cloud" />
+      
+        <category term="azure" />
+      
+
+      
+        <summary type="html">Intro Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Getting Started Service Bus Queue</title>
+      <link href="/welcome-to-getting-started-servicebusqueue" rel="alternate" type="text/html" title="Getting Started Service Bus Queue" />
+      <published>2019-10-02T19:00:00+09:00</published>
+      <updated>2019-10-02T19:00:00+09:00</updated>
+      <id>/welcome-to-getting-started-servicebusqueue</id>
+      <content type="html" xml:base="/welcome-to-getting-started-servicebusqueue">&lt;h3&gt;Create Service bus queue&lt;/h3&gt;
+&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
+&lt;li&gt;Go to azure portal - Run cloud shell&lt;small&gt;(If your azure subscription dosen't have storage account, you should create it first)&lt;/small&gt;&lt;/li&gt;
+&lt;li&gt;Define parameter file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
+#vi exported
+
+#!/bin/bash
+###################
+Define 
+###################
+export rgnm=&quot;&quot;
+export location=&quot;&quot;
+export namespace=&quot;&quot;
+export queuename=&quot;&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
+    &lt;li&gt;Create Resource&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
+# Create a resource group
+resourceGroupName=&quot;myResourceGroup&quot;
+
+az group create --name $resourceGroupName --location eastus
+
+# Create a Service Bus messaging namespace with a unique name
+namespaceName=myNameSpace$RANDOM
+az servicebus namespace create --resource-group $resourceGroupName --name $namespaceName --location eastus
+
+# Create a Service Bus queue
+az servicebus queue create --resource-group $resourceGroupName --namespace-name $namespaceName --name BasicQueue
+
+# Get the connection string for the namespace
+connectionString=$(az servicebus namespace authorization-rule keys list --resource-group $resourceGroupName --namespace-name $namespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
+&lt;/code&gt;&lt;/pre&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+        <category term="cloud" />
+      
+        <category term="azure" />
+      
+
+      
+        <summary type="html">Create Service bus queue Go to azure portal - Run cloud shell(If your azure subscription dosen't have storage account, you should create it first) Define parameter file #vi exported</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Welcome to cloud</title>
+      <link href="/welcome-to-cloud" rel="alternate" type="text/html" title="Welcome to cloud" />
+      <published>2019-09-29T19:18:00+09:00</published>
+      <updated>2019-09-29T19:18:00+09:00</updated>
+      <id>/welcome-to-cloud</id>
+      <content type="html" xml:base="/welcome-to-cloud">&lt;p&gt;This tab is about cloud computing.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="cloud" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about cloud computing.</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

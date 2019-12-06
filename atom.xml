@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>The IT Service Technology Blog</description>
+    <link>
+    </link>
+    
+      
+      <item>
+        <title>Deploy Dotnet MVC web</title>
+        
+          <description>&lt;h1 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h1&gt;
+&lt;h2 id=&quot;install-dotnet-core-sdk&quot;&gt;Install Dotnet core SDK&lt;/h2&gt;
+&lt;p&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current
+&lt;br /&gt;Find OS Type and version matches your environment.
+&lt;br /&gt;In my case, using ubuntu 18.x version&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        
+        <pubDate>Fri, 22 Nov 2019 19:18:00 +0900</pubDate>
+        <link>
+        /dotnetMVCDeploy</link>
+        <guid isPermaLink="true">/dotnetMVCDeploy</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>CICD pipeline for container based workloads</title>
+        
+          <description>&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks
+&lt;br /&gt;
+&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 12 Nov 2019 19:18:00 +0900</pubDate>
+        <link>
+        /CICD-pipeline-for-container-based-workloads</link>
+        <guid isPermaLink="true">/CICD-pipeline-for-container-based-workloads</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Queue Based Load Leveling</title>
+        
+          <description>&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 16 Oct 2019 19:18:00 +0900</pubDate>
+        <link>
+        /queueBasedLoadLeveling</link>
+        <guid isPermaLink="true">/queueBasedLoadLeveling</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Queue Triggered Azure Function App 2</title>
+        
+          <description>&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;I'll use &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
+&lt;p&gt;It implements &lt;b&gt;https://github.com/rudgh1027/cloud/tree/master/azure/001.queueTriggeredFunction&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;So, I recommand you to follow everything in previous practice.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 14 Oct 2019 19:18:00 +0900</pubDate>
+        <link>
+        /queue-Triggered-Function_tableInsert</link>
+        <guid isPermaLink="true">/queue-Triggered-Function_tableInsert</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Queue Triggered Azure Function App 1</title>
+        
+          <description>&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;&lt;img style=&quot;width: 700px;&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-pattern.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We are going to make &lt;b&gt;dotnet console application as task&lt;/b&gt;, &lt;b&gt;azure function app as service&lt;/b&gt;.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 09 Oct 2019 19:18:00 +0900</pubDate>
+        <link>
+        /queue-Triggered-Function</link>
+        <guid isPermaLink="true">/queue-Triggered-Function</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Getting Started Service Bus Queue</title>
+        
+          <description>&lt;h3&gt;Create Service bus queue&lt;/h3&gt;
+&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
+&lt;li&gt;Go to azure portal - Run cloud shell&lt;small&gt;(If your azure subscription dosen't have storage account, you should create it first)&lt;/small&gt;&lt;/li&gt;
+&lt;li&gt;Define parameter file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
+#vi exported
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        
+        <pubDate>Wed, 02 Oct 2019 19:00:00 +0900</pubDate>
+        <link>
+        /welcome-to-getting-started-servicebusqueue</link>
+        <guid isPermaLink="true">/welcome-to-getting-started-servicebusqueue</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Asynchronous Messaging Pattern 1</title>
+        
+          <description>&lt;h3&gt;Intro&lt;/h3&gt;
+&lt;p&gt;Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 02 Oct 2019 19:00:00 +0900</pubDate>
+        <link>
+        /welcome-to-asynchronous-messaging_1</link>
+        <guid isPermaLink="true">/welcome-to-asynchronous-messaging_1</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to System Engineer</title>
+        
+          <description>&lt;p&gt;This tab is about my work as system engineer.&lt;/p&gt;
+</description>
+        
+        <pubDate>Sun, 29 Sep 2019 19:18:00 +0900</pubDate>
+        <link>
+        /welcome-to-systemengineer</link>
+        <guid isPermaLink="true">/welcome-to-systemengineer</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to Life</title>
+        
+          <description>&lt;p&gt;This tab is about how I live in wonderful world!&lt;/p&gt;
+</description>
+        
+        <pubDate>Sun, 29 Sep 2019 19:18:00 +0900</pubDate>
+        <link>
+        /welcome-to-life</link>
+        <guid isPermaLink="true">/welcome-to-life</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to DevOps</title>
+        
+          <description>&lt;p&gt;This tab is about technical information of devops.&lt;/p&gt;
+</description>
+        
+        <pubDate>Sun, 29 Sep 2019 19:18:00 +0900</pubDate>
+        <link>
+        /welcome-to-devops</link>
+        <guid isPermaLink="true">/welcome-to-devops</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to cloud</title>
+        
+          <description>&lt;p&gt;This tab is about cloud computing.&lt;/p&gt;
+</description>
+        
+        <pubDate>Sun, 29 Sep 2019 19:18:00 +0900</pubDate>
+        <link>
+        /welcome-to-cloud</link>
+        <guid isPermaLink="true">/welcome-to-cloud</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to Architecture</title>
+        
+          <description>&lt;p&gt;This tab is about architecture patterns.&lt;/p&gt;
+</description>
+        
+        <pubDate>Sun, 29 Sep 2019 19:00:00 +0900</pubDate>
+        <link>
+        /welcome-to-architecture</link>
+        <guid isPermaLink="true">/welcome-to-architecture</guid>
+      </item>
+      
+    
+  </channel>
+</rss>

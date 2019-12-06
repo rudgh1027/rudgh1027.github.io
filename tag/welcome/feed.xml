@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="/tag/welcome/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="/" rel="alternate" type="text/html" />
+  <updated>2019-12-06T14:04:32+09:00</updated>
+  <id>/tag/welcome/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">GKArchy | </title>
+  
+
+  
+    <subtitle>The IT Service Technology Blog</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Welcome to Life</title>
+      <link href="/welcome-to-life" rel="alternate" type="text/html" title="Welcome to Life" />
+      <published>2019-09-29T19:18:00+09:00</published>
+      <updated>2019-09-29T19:18:00+09:00</updated>
+      <id>/welcome-to-life</id>
+      <content type="html" xml:base="/welcome-to-life">&lt;p&gt;This tab is about how I live in wonderful world!&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="life" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about how I live in wonderful world!</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Welcome to DevOps</title>
+      <link href="/welcome-to-devops" rel="alternate" type="text/html" title="Welcome to DevOps" />
+      <published>2019-09-29T19:18:00+09:00</published>
+      <updated>2019-09-29T19:18:00+09:00</updated>
+      <id>/welcome-to-devops</id>
+      <content type="html" xml:base="/welcome-to-devops">&lt;p&gt;This tab is about technical information of devops.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="devops" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about technical information of devops.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Welcome to cloud</title>
+      <link href="/welcome-to-cloud" rel="alternate" type="text/html" title="Welcome to cloud" />
+      <published>2019-09-29T19:18:00+09:00</published>
+      <updated>2019-09-29T19:18:00+09:00</updated>
+      <id>/welcome-to-cloud</id>
+      <content type="html" xml:base="/welcome-to-cloud">&lt;p&gt;This tab is about cloud computing.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="cloud" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about cloud computing.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Welcome to System Engineer</title>
+      <link href="/welcome-to-systemengineer" rel="alternate" type="text/html" title="Welcome to System Engineer" />
+      <published>2019-09-29T19:18:00+09:00</published>
+      <updated>2019-09-29T19:18:00+09:00</updated>
+      <id>/welcome-to-systemengineer</id>
+      <content type="html" xml:base="/welcome-to-systemengineer">&lt;p&gt;This tab is about my work as system engineer.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="system-engineer" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about my work as system engineer.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Welcome to Architecture</title>
+      <link href="/welcome-to-architecture" rel="alternate" type="text/html" title="Welcome to Architecture" />
+      <published>2019-09-29T19:00:00+09:00</published>
+      <updated>2019-09-29T19:00:00+09:00</updated>
+      <id>/welcome-to-architecture</id>
+      <content type="html" xml:base="/welcome-to-architecture">&lt;p&gt;This tab is about architecture patterns.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about architecture patterns.</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="/tag/devops/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="/" rel="alternate" type="text/html" />
+  <updated>2019-12-06T14:04:32+09:00</updated>
+  <id>/tag/devops/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">GKArchy | </title>
+  
+
+  
+    <subtitle>The IT Service Technology Blog</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Deploy Dotnet MVC web</title>
+      <link href="/dotnetMVCDeploy" rel="alternate" type="text/html" title="Deploy Dotnet MVC web" />
+      <published>2019-11-22T19:18:00+09:00</published>
+      <updated>2019-11-22T19:18:00+09:00</updated>
+      <id>/dotnetMVCDeploy</id>
+      <content type="html" xml:base="/dotnetMVCDeploy">&lt;h1 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h1&gt;
+&lt;h2 id=&quot;install-dotnet-core-sdk&quot;&gt;Install Dotnet core SDK&lt;/h2&gt;
+&lt;p&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current
+&lt;br /&gt;Find OS Type and version matches your environment.
+&lt;br /&gt;In my case, using ubuntu 18.x version&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+
+sudo apt-get update
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-3.0 -y
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;pull-dotnet-core-image&quot;&gt;Pull dotnet core image&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+docker search dotnet
+    ## result
+    ## microsoft/dotnet                      Official images for .NET Core and ASP.NET Co…   1446          [OK]
+    ## ....
+docker pull microsoft/dotnet:latest
+    ## result
+    ## 9a0b0ce99936: Pull complete
+    ## db3b6004c61a: Pull complete
+    ## f8f075920295: Pull complete
+    ## 6ef14aff1139: Extracting [==================================================&amp;gt;]  50.07MB/50.07MB
+    ## c05081985e91: Download complete
+    ## 6c5e96b85e8c: Download complete
+    ## d39c626fbbd1: Download complete
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;make-dotnet-project&quot;&gt;Make Dotnet Project&lt;/h1&gt;
+&lt;h2 id=&quot;create-project&quot;&gt;create project&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## make solution file
+mkdir test
+cd test
+dotnet new sln
+
+## make mvc project
+mkdir test
+cd test
+dotnet new mvc
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;local-test&quot;&gt;Local Test&lt;/h2&gt;
+&lt;h3 id=&quot;change-listening-port&quot;&gt;Change Listening port&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;This is just for local test purpose.&lt;/b&gt; It is useless setting After deploying as docker container, because docker automatically configure port fowarding setting.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+cd ~/test/test
+vi Program.cs
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Setting like that
+public class Program
+  {
+      public static void Main(string[] args)
+      {
+          CreateHostBuilder(args).Build().Run();
+      }&lt;/p&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  public static IHostBuilder CreateHostBuilder(string[] args) =&amp;gt;
+      Host.CreateDefaultBuilder(args)
+          .ConfigureWebHostDefaults(webBuilder =&amp;gt;
+          {
+                  webBuilder.UseUrls(&quot;http://*:80;http://*:5000;&quot;)
+                  .UseStartup&amp;lt;Startup&amp;gt;();
+          });   }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Change the port from 80, 5000 to any number you want
+&lt;br /&gt; reference : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;run-dotnet-project-and-check-connection&quot;&gt;Run dotnet project and check connection&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+cd ~/test/test
+dotnet run
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you create project on azure or cloud plateform, You should add firewall rule allowing your selected port.&lt;/p&gt;
+
+&lt;p&gt;Type http://(public ip):(your port) on your browser
+You can see a dotnet default web page. Press ctl+c on your server machine to exit the web service.&lt;/p&gt;
+
+&lt;h1 id=&quot;deploy-to-docker&quot;&gt;Deploy to Docker&lt;/h1&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0&lt;/p&gt;
+&lt;h2 id=&quot;make-dockerfile&quot;&gt;Make Dockerfile&lt;/h2&gt;
+&lt;p&gt;type “   vi ~/test/Dockerfile   “&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+WORKDIR /app
+
+## copy csproj and restore as distinct layers
+COPY *.sln .
+COPY test/*.csproj ./test/
+RUN dotnet restore
+
+## copy everything else and build app
+COPY test/. ./test/
+WORKDIR /app/test
+RUN dotnet publish -c Release -o out
+
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/test/out ./
+ENTRYPOINT [&quot;dotnet&quot;, &quot;test.dll&quot;]
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to use another project name, replace “test” to “Your Project Name”.
+reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1&lt;/p&gt;
+
+&lt;h2 id=&quot;run-in-a-linux-container&quot;&gt;Run in a Linux container&lt;/h2&gt;
+&lt;p&gt;Go to directory that has Dockerfile, Build and Deploy.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+cd ~/test/
+## Build dotnet core web by Dockerfile
+docker build -t test .
+
+## Run on background
+## Port fowarding : Local 5000 port -&amp;gt; container 80 port
+## Replace 5000 to another port you want 
+docker run -it --rm -p 5000:80 --name test_docker_aspnet test -d
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can connect web page by Public IP address on 5000 port
+&lt;br /&gt;reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="devops" />
+      
+        <category term="systemengineer" />
+      
+
+      
+        <summary type="html">Setting environment Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">CICD pipeline for container based workloads</title>
+      <link href="/CICD-pipeline-for-container-based-workloads" rel="alternate" type="text/html" title="CICD pipeline for container based workloads" />
+      <published>2019-11-12T19:18:00+09:00</published>
+      <updated>2019-11-12T19:18:00+09:00</updated>
+      <id>/CICD-pipeline-for-container-based-workloads</id>
+      <content type="html" xml:base="/CICD-pipeline-for-container-based-workloads">&lt;h1 id=&quot;describe-this-pattern&quot;&gt;Describe this pattern&lt;/h1&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks
+&lt;br /&gt;
+&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;feature&quot;&gt;Feature&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;In order to know details about this architecture, click above URL.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;implement&quot;&gt;Implement&lt;/h1&gt;
+&lt;h2 id=&quot;1-make-resource-from-predefined-template&quot;&gt;1. Make resource from predefined template.&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Right click the Link: &lt;a href=&quot;https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fdevops-with-aks%2Fazuredeploy.json&quot;&gt;Click Here&lt;/a&gt;, and open in the new tab.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Login to Azure, then you can see &lt;b&gt;Custom deployment&lt;/b&gt; in azure portal.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Click azure cloud shell button on the top of the web page.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;After loading Azure Cloud Shell, Type &lt;code&gt;az ad sp create-for-rbac --name myDevOpsScenario&lt;/code&gt;
+&lt;br /&gt; ※ If it says you don’t have sufficiant privilige, ask your owner of subscription to give you &lt;b&gt;Owner&lt;/b&gt; role or custom role that has &lt;b&gt;Microsoft.Authorization/roleAssignments/write&lt;/b&gt;. Every predefined role don’t have that permition. (reference : https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles )
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.spinfo.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Make SSH Key : Type &lt;code&gt;ssh-keygen -t rsa -b 2048&lt;/code&gt; on your cloud shell. Terminal may ask you key name and passphrase. Just type &lt;b&gt;Enter&lt;/b&gt; key.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Find the supported Kubernetes versions for your deployment region : &lt;code&gt;az aks get-versions -l &lt;region&gt; --query &quot;orchestrators[?default!=null].orchestratorVersion&quot; -o tsv&amp;lt;/code&amp;gt;&lt;/region&gt;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;From now, you can fill on the blanks.&lt;br /&gt;
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.deploymain.png&quot; /&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Sp Clint Id : “appId” of previous step&lt;/li&gt;
+      &lt;li&gt;Sp Clint Secret : ““password” of previous step&lt;/li&gt;
+      &lt;li&gt;Linux Admin Username &amp;amp; Password : Now, you should define.&lt;/li&gt;
+      &lt;li&gt;Linux SSH Public Key : We already make it in previous step. Type the command on cloud shell &lt;code&gt;cat ~/.ssh/id_rsa.pub&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Kubernetes Version : Type as you know.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Waiting for 20-30 minute.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-enter-jenkins-web-page&quot;&gt;2. Enter Jenkins Web Page.&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Click Jenkins server on your resource tab in azure portal. And copy public IP Address of jenkins server.&lt;/li&gt;
+  &lt;li&gt;Type http://(public ip address) on your browser. Than you can see the page like below.
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.jenkins_default.png&quot; /&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;You need to use ssh cli command. When you use linux or MAC environment, you just type command &lt;code&gt;ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......&lt;/code&gt; sign in your browser. If you use windows environment, you need to install 3th-party ssh tool.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the lab, I’m going to use git bash to establish ssh connection.
+    &lt;blockquote&gt;
+      &lt;p&gt;Open git bash terminal - type &lt;code&gt;ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/unlock_jenkins.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. &lt;code&gt;ssh (yourID)@(Jenkins Public IP)&lt;/code&gt;. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type &lt;code&gt;sudo cat /var/lib/jenkins/secrets/initialAdminPassword&lt;/code&gt;
+※ Reference : https://docs.microsoft.com/ko-kr/azure/jenkins/install-jenkins-solution-template&lt;/li&gt;
+  &lt;li&gt;Create initial admin account and Install suggested plugins. Now, you can see Jenkins Dashboard.&lt;/li&gt;
+  &lt;li&gt;In main page of jenkins console, click &lt;b&gt;Hello World Build &amp;amp; Deploy&lt;/b&gt; link. Then you can see deployed pipeline.
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.jenkins_pipeline.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3-enter-grafana-web-page&quot;&gt;3. Enter Grafana Web Page.&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Reset admin password
+    &lt;ul&gt;
+      &lt;li&gt;Check public IP address of Grafana VM. Type &lt;code&gt;ssh (your admin ID)@(Grafana Public IP)&lt;/code&gt; on your cloud shell.&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;pre style=&quot;width:50%;&quot;&gt;&lt;code&gt;
+  sudo -s
+  apt install sqlite3
+  sqlite3 /var/lib/grafana/grafana.db
+  update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', 
+  salt = 'F3FAxVm33R' where login = 'admin'
+    
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Enter Web page on your browser : http://(Grafana Public IP):3000&lt;/li&gt;
+  &lt;li&gt;Login : admin / admin ( Initialized in step “Reset admin password” )&lt;/li&gt;
+  &lt;li&gt;Now, we can connect to Grafana web page. Data source from azure monitor is already prepared for you.
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.grafana_main.png&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;If you want to add Data source 
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.add_datasource.png&quot; /&gt;
+To fill in the blacks, type “ac account list” on your azure cloud shell.&lt;br /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;You can make dashboard  like below image.
+&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/001.grafana_makedashboard.png&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-make-container-image-in-acr&quot;&gt;4. Make container image in ACR&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-make-development-environment&quot;&gt;1) Make development environment&lt;/h3&gt;
+&lt;p&gt;Before login to ACR (Azure Container Registry), you’re supposed to have environment that has docker engine and az cli package.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Deploy ubuntu server with docker engine in azure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+##############
+## RG CREATE ##
+##############
+loc=                ##### INSERT YOUR VALUE!!!!
+rgname=             ##### INSERT YOUR VALUE!!!!
+
+az group create --location $loc --name $rgname
+
+##############
+## VM CREATE ##
+##############
+
+adminname=          ##### INSERT YOUR VALUE!!!!
+vmname=             ##### INSERT YOUR VALUE!!!!
+
+az vm create \
+  --resource-group $rgname \
+  --name $vmname \
+  --image UbuntuLTS \
+  --admin-username $adminname 
+
+####################
+## DOCKER EXTENSION ##
+####################
+
+az vm extension set --name DockerExtension --publisher Microsoft.Azure.Extensions --resource-group $rgname --vm-name $vmname
+
+
+###################
+## CONNECT TO VM ##
+###################
+
+pip=$(az vm list-ip-addresses --name $vmname | jq &quot;.[].virtualMachine.network.publicIpAddresses[0].ipAddress&quot; -r)
+ssh $adminname@$pip
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install az cli to ubuntu server&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+sudo -s
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install jq library to ubuntu server in order to use az cli esaily&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+apt install jq
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;2-login-to-az-cli-with-sp&quot;&gt;2) Login to az cli with SP&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+az login --service-principal -u http://((SP name)) --tenant ((your tenant name))
+##input SP password
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;3-login-to-acr&quot;&gt;3) Login to ACR&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+acrname=$(az acr list --resource-group ((your RG name)) | jq -r &quot;.[].name&quot;)
+az acr login --name $acrname
+##Login Succeeded
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;4-make-docker-web-application&quot;&gt;4) Make docker web application&lt;/h3&gt;
+&lt;p&gt;In this step, I’ll use ASP.NET MVC WEB image.
+Look at the post : https://github.com/rudgh1027/cloud/blob/master/azure/docker/002.dotnetMVCDeploy.md&lt;/p&gt;
+
+&lt;h3 id=&quot;5-push-to-the-acr&quot;&gt;5) Push to the ACR&lt;/h3&gt;
+&lt;p&gt;After done precess that written in the above post&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+loginsvr=$(az acr list --resource-group ((your resource group name)) | jq -r &quot;.[].loginServer&quot;)
+docker tag test $loginsvr/azure-asp-net-web:v1
+docker images
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then you can see the redefined image with tag “v1”&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+docker push $loginsvr/azure-asp-net-web:v1
+az acr repository list --name $acrname --output table
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr&lt;/p&gt;
+
+&lt;h2 id=&quot;5-deploy-container-to-aks&quot;&gt;5. Deploy container to AKS&lt;/h2&gt;
+&lt;h3 id=&quot;1-install-the-kubernetes-cli&quot;&gt;1) Install the kubernetes cli&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+az aks install-cli
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli&lt;/p&gt;
+
+&lt;h3 id=&quot;2-install-the-kubernetes-cli&quot;&gt;2) Install the kubernetes cli&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+aksname=$(az aks list | jq -r &quot;.[].name&quot;)
+az aks get-credentials  --resource-group ((your resource group name)) --name $aksname
+## It will reply that &quot;Merged ((your aks name)) as current context in /home/((your admin id))/.kube/config&quot;
+
+kubectl get nodes
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster#connect-to-cluster-using-kubectl&lt;/p&gt;
+
+&lt;h3 id=&quot;3-make-deployment-yaml-file&quot;&gt;3) Make deployment yaml file&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+## vi azure-asp-net-web.yaml
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: azure-asp-net-web
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: azure-asp-net-web
+    spec:
+      containers:
+        - name: azure-asp-net-web
+          image: acrfbfxvhmzjaele.azurecr.io/azure-asp-net-web:v1
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: azure-asp-net-lb
+spec:
+  ports:
+    - name: http-port
+      port: 8080
+      targetPort: 80
+  selector:
+    app: mssample-kub-app
+  type: LoadBalancer
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;4-deploy-to-aks&quot;&gt;4) Deploy to AKS&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+## create Pod, deployment, and service
+kubectl create -f azure-asp-net-web.yaml
+
+
+## check pod
+kubectl get pod
+
+## check service
+kubectl get service
+
+## check deployment
+kubectl get deployment
+  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;6-continueously-manage-by-jenkins-and-github--see-the-below-reference&quot;&gt;6. Continueously manage by Jenkins and github : See the below reference&lt;/h2&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="devops" />
+      
+        <category term="azure" />
+      
+
+      
+        <summary type="html">Describe this pattern reference : https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/devops-with-aks</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Welcome to DevOps</title>
+      <link href="/welcome-to-devops" rel="alternate" type="text/html" title="Welcome to DevOps" />
+      <published>2019-09-29T19:18:00+09:00</published>
+      <updated>2019-09-29T19:18:00+09:00</updated>
+      <id>/welcome-to-devops</id>
+      <content type="html" xml:base="/welcome-to-devops">&lt;p&gt;This tab is about technical information of devops.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="devops" />
+      
+        <category term="welcome" />
+      
+
+      
+        <summary type="html">This tab is about technical information of devops.</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

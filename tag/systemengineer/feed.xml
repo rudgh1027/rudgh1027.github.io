@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="/tag/systemengineer/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="/" rel="alternate" type="text/html" />
+  <updated>2019-12-06T14:04:32+09:00</updated>
+  <id>/tag/systemengineer/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">GKArchy | </title>
+  
+
+  
+    <subtitle>The IT Service Technology Blog</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Deploy Dotnet MVC web</title>
+      <link href="/dotnetMVCDeploy" rel="alternate" type="text/html" title="Deploy Dotnet MVC web" />
+      <published>2019-11-22T19:18:00+09:00</published>
+      <updated>2019-11-22T19:18:00+09:00</updated>
+      <id>/dotnetMVCDeploy</id>
+      <content type="html" xml:base="/dotnetMVCDeploy">&lt;h1 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h1&gt;
+&lt;h2 id=&quot;install-dotnet-core-sdk&quot;&gt;Install Dotnet core SDK&lt;/h2&gt;
+&lt;p&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current
+&lt;br /&gt;Find OS Type and version matches your environment.
+&lt;br /&gt;In my case, using ubuntu 18.x version&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+
+sudo apt-get update
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-3.0 -y
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;pull-dotnet-core-image&quot;&gt;Pull dotnet core image&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+docker search dotnet
+    ## result
+    ## microsoft/dotnet                      Official images for .NET Core and ASP.NET Co…   1446          [OK]
+    ## ....
+docker pull microsoft/dotnet:latest
+    ## result
+    ## 9a0b0ce99936: Pull complete
+    ## db3b6004c61a: Pull complete
+    ## f8f075920295: Pull complete
+    ## 6ef14aff1139: Extracting [==================================================&amp;gt;]  50.07MB/50.07MB
+    ## c05081985e91: Download complete
+    ## 6c5e96b85e8c: Download complete
+    ## d39c626fbbd1: Download complete
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;make-dotnet-project&quot;&gt;Make Dotnet Project&lt;/h1&gt;
+&lt;h2 id=&quot;create-project&quot;&gt;create project&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;
+## make solution file
+mkdir test
+cd test
+dotnet new sln
+
+## make mvc project
+mkdir test
+cd test
+dotnet new mvc
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;local-test&quot;&gt;Local Test&lt;/h2&gt;
+&lt;h3 id=&quot;change-listening-port&quot;&gt;Change Listening port&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;This is just for local test purpose.&lt;/b&gt; It is useless setting After deploying as docker container, because docker automatically configure port fowarding setting.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+cd ~/test/test
+vi Program.cs
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Setting like that
+public class Program
+  {
+      public static void Main(string[] args)
+      {
+          CreateHostBuilder(args).Build().Run();
+      }&lt;/p&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  public static IHostBuilder CreateHostBuilder(string[] args) =&amp;gt;
+      Host.CreateDefaultBuilder(args)
+          .ConfigureWebHostDefaults(webBuilder =&amp;gt;
+          {
+                  webBuilder.UseUrls(&quot;http://*:80;http://*:5000;&quot;)
+                  .UseStartup&amp;lt;Startup&amp;gt;();
+          });   }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Change the port from 80, 5000 to any number you want
+&lt;br /&gt; reference : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#server-urls&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;run-dotnet-project-and-check-connection&quot;&gt;Run dotnet project and check connection&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+cd ~/test/test
+dotnet run
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you create project on azure or cloud plateform, You should add firewall rule allowing your selected port.&lt;/p&gt;
+
+&lt;p&gt;Type http://(public ip):(your port) on your browser
+You can see a dotnet default web page. Press ctl+c on your server machine to exit the web service.&lt;/p&gt;
+
+&lt;h1 id=&quot;deploy-to-docker&quot;&gt;Deploy to Docker&lt;/h1&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0&lt;/p&gt;
+&lt;h2 id=&quot;make-dockerfile&quot;&gt;Make Dockerfile&lt;/h2&gt;
+&lt;p&gt;type “   vi ~/test/Dockerfile   “&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+WORKDIR /app
+
+## copy csproj and restore as distinct layers
+COPY *.sln .
+COPY test/*.csproj ./test/
+RUN dotnet restore
+
+## copy everything else and build app
+COPY test/. ./test/
+WORKDIR /app/test
+RUN dotnet publish -c Release -o out
+
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/test/out ./
+ENTRYPOINT [&quot;dotnet&quot;, &quot;test.dll&quot;]
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to use another project name, replace “test” to “Your Project Name”.
+reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#the-dockerfile-1&lt;/p&gt;
+
+&lt;h2 id=&quot;run-in-a-linux-container&quot;&gt;Run in a Linux container&lt;/h2&gt;
+&lt;p&gt;Go to directory that has Dockerfile, Build and Deploy.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+cd ~/test/
+## Build dotnet core web by Dockerfile
+docker build -t test .
+
+## Run on background
+## Port fowarding : Local 5000 port -&amp;gt; container 80 port
+## Replace 5000 to another port you want 
+docker run -it --rm -p 5000:80 --name test_docker_aspnet test -d
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can connect web page by Public IP address on 5000 port
+&lt;br /&gt;reference : https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-3.0#run-in-a-linux-container&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>gkarchy</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="devops" />
+      
+        <category term="systemengineer" />
+      
+
+      
+        <summary type="html">Setting environment Install Dotnet core SDK https://dotnet.microsoft.com/download/linux-package-manager/sdk-current Find OS Type and version matches your environment. In my case, using ubuntu 18.x version wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb sudo dpkg -i packages-microsoft-prod.deb</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
