@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/cloud/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-06T20:13:31+09:00</updated>
+  <updated>2019-12-07T10:23:54+09:00</updated>
   <id>/tag/cloud/feed.xml</id>
 
   
@@ -38,7 +38,7 @@
       <updated>2019-10-14T19:18:00+09:00</updated>
       <id>/queue-Triggered-Function_tableInsert</id>
       <content type="html" xml:base="/queue-Triggered-Function_tableInsert">&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;I'll implements this architecture using &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
 &lt;p&gt;I recommand you to follow everything in previous practice. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
@@ -449,115 +449,6 @@ dotnet run
 
       
         <summary type="html">Architecture We are going to make dotnet console application as task, azure function app as service.</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Getting Started Service Bus Queue</title>
-      <link href="/welcome-to-getting-started-servicebusqueue" rel="alternate" type="text/html" title="Getting Started Service Bus Queue" />
-      <published>2019-10-02T19:00:00+09:00</published>
-      <updated>2019-10-02T19:00:00+09:00</updated>
-      <id>/welcome-to-getting-started-servicebusqueue</id>
-      <content type="html" xml:base="/welcome-to-getting-started-servicebusqueue">&lt;h3&gt;Create Service bus queue&lt;/h3&gt;
-&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
-&lt;li&gt;Go to azure portal - Run cloud shell&lt;small&gt;(If your azure subscription dosen't have storage account, you should create it first)&lt;/small&gt;&lt;/li&gt;
-&lt;li&gt;Define parameter file&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
-#vi exported
-
-#!/bin/bash
-###################
-Define 
-###################
-export rgnm=&quot;&quot;
-export location=&quot;&quot;
-export namespace=&quot;&quot;
-export queuename=&quot;&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
-    &lt;li&gt;Create Resource&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
-# Create a resource group
-resourceGroupName=&quot;myResourceGroup&quot;
-
-az group create --name $resourceGroupName --location eastus
-
-# Create a Service Bus messaging namespace with a unique name
-namespaceName=myNameSpace$RANDOM
-az servicebus namespace create --resource-group $resourceGroupName --name $namespaceName --location eastus
-
-# Create a Service Bus queue
-az servicebus queue create --resource-group $resourceGroupName --namespace-name $namespaceName --name BasicQueue
-
-# Get the connection string for the namespace
-connectionString=$(az servicebus namespace authorization-rule keys list --resource-group $resourceGroupName --namespace-name $namespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
-&lt;/code&gt;&lt;/pre&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>gkarchy</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="architecture" />
-      
-        <category term="cloud" />
-      
-        <category term="azure" />
-      
-
-      
-        <summary type="html">Create Service bus queue Go to azure portal - Run cloud shell(If your azure subscription dosen't have storage account, you should create it first) Define parameter file #vi exported</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Welcome to cloud</title>
-      <link href="/welcome-to-cloud" rel="alternate" type="text/html" title="Welcome to cloud" />
-      <published>2019-09-29T19:18:00+09:00</published>
-      <updated>2019-09-29T19:18:00+09:00</updated>
-      <id>/welcome-to-cloud</id>
-      <content type="html" xml:base="/welcome-to-cloud">&lt;p&gt;This tab is about cloud computing.&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>gkarchy</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="cloud" />
-      
-        <category term="welcome" />
-      
-
-      
-        <summary type="html">This tab is about cloud computing.</summary>
       
 
       

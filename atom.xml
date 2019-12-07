@@ -35,7 +35,7 @@ sudo dpkg -i packages-microsoft-prod.deb
         
           <description>&lt;h2 id=&quot;describe-this-pattern-1&quot;&gt;Describe this pattern &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png&quot; /&gt;&lt;/p&gt;
 
 </description>
         
@@ -66,7 +66,7 @@ sudo dpkg -i packages-microsoft-prod.deb
         <title>Queue Triggered Azure Function App 2</title>
         
           <description>&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;I'll implements this architecture using &lt;b&gt;azure table storage&lt;/b&gt; as datastore and &lt;b&gt;console application program&lt;/b&gt; as web app.&lt;/p&gt;
 &lt;p&gt;I recommand you to follow everything in previous practice. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
@@ -93,28 +93,6 @@ sudo dpkg -i packages-microsoft-prod.deb
         <link>
         /queue-Triggered-Function</link>
         <guid isPermaLink="true">/queue-Triggered-Function</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Getting Started Service Bus Queue</title>
-        
-          <description>&lt;h3&gt;Create Service bus queue&lt;/h3&gt;
-&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
-&lt;li&gt;Go to azure portal - Run cloud shell&lt;small&gt;(If your azure subscription dosen't have storage account, you should create it first)&lt;/small&gt;&lt;/li&gt;
-&lt;li&gt;Define parameter file&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
-#vi exported
-
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-        
-        <pubDate>Wed, 02 Oct 2019 19:00:00 +0900</pubDate>
-        <link>
-        /welcome-to-getting-started-servicebusqueue</link>
-        <guid isPermaLink="true">/welcome-to-getting-started-servicebusqueue</guid>
       </item>
       
     
@@ -159,48 +137,6 @@ sudo dpkg -i packages-microsoft-prod.deb
         <link>
         /welcome-to-life</link>
         <guid isPermaLink="true">/welcome-to-life</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Welcome to DevOps</title>
-        
-          <description>&lt;p&gt;This tab is about technical information of devops.&lt;/p&gt;
-</description>
-        
-        <pubDate>Sun, 29 Sep 2019 19:18:00 +0900</pubDate>
-        <link>
-        /welcome-to-devops</link>
-        <guid isPermaLink="true">/welcome-to-devops</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Welcome to cloud</title>
-        
-          <description>&lt;p&gt;This tab is about cloud computing.&lt;/p&gt;
-</description>
-        
-        <pubDate>Sun, 29 Sep 2019 19:18:00 +0900</pubDate>
-        <link>
-        /welcome-to-cloud</link>
-        <guid isPermaLink="true">/welcome-to-cloud</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Welcome to Architecture</title>
-        
-          <description>&lt;p&gt;This tab is about architecture patterns.&lt;/p&gt;
-</description>
-        
-        <pubDate>Sun, 29 Sep 2019 19:00:00 +0900</pubDate>
-        <link>
-        /welcome-to-architecture</link>
-        <guid isPermaLink="true">/welcome-to-architecture</guid>
       </item>
       
     

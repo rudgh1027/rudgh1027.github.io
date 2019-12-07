@@ -186,7 +186,7 @@ into the {body} of the default.hbs template -->
                 <div class="kg-card-markdown">
                     <h2 id="describe-this-pattern-1">Describe this pattern <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h2>
 <p><br />
-<img style="width: 700px" src="https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png" /></p>
+<img src="https://docs.microsoft.com/en-us/azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png" /></p>
 
 <h3 id="feature">Feature</h3>
 <ul>
@@ -207,7 +207,7 @@ into the {body} of the default.hbs template -->
   </li>
   <li>After loading Azure Cloud Shell, Type <code>az ad sp create-for-rbac --name myDevOpsScenario</code>
 <br /> ※ If it says you don’t have sufficiant privilige, ask your owner of subscription to give you <b>Owner</b> role or custom role that has <b>Microsoft.Authorization/roleAssignments/write</b>. Every predefined role don’t have that permition. <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>
-<img style="width: 700px" src="/assets/images/001.spinfo.png" /></li>
+<img src="/assets/images/001.spinfo.png" /></li>
   <li>
     <p>Make SSH Key : Type <code>ssh-keygen -t rsa -b 2048</code> on your cloud shell. Terminal may ask you key name and passphrase. Just type <b>Enter</b> key.</p>
   </li>
@@ -215,7 +215,7 @@ into the {body} of the default.hbs template -->
     <p>Find the supported Kubernetes versions for your deployment region : <code>az aks get-versions -l <region> --query "orchestrators[?default!=null].orchestratorVersion" -o tsv&lt;/code&gt;</region></code></p>
   </li>
   <li>From now, you can fill on the blanks.<br />
-<img style="width: 700px" src="/assets/images/001.deploymain.png" />
+<img src="/assets/images/001.deploymain.png" />
     <ol>
       <li>Sp Clint Id : “appId” of previous step</li>
       <li>Sp Clint Secret : ““password” of previous step</li>
@@ -231,7 +231,7 @@ into the {body} of the default.hbs template -->
 <ul>
   <li>Click Jenkins server on your resource tab in azure portal. And copy public IP Address of jenkins server.</li>
   <li>Type http://(public ip address) on your browser. Than you can see the page like below.
-<img style="width: 700px" src="/assets/images/001.jenkins_default.png" />
+<img src="/assets/images/001.jenkins_default.png" />
     <blockquote>
       <p>You need to use ssh cli command. When you use linux or MAC environment, you just type command <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code> sign in your browser. If you use windows environment, you need to install 3th-party ssh tool.</p>
     </blockquote>
@@ -242,11 +242,11 @@ into the {body} of the default.hbs template -->
     </blockquote>
   </li>
   <li>Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.
-<img style="width: 700px" src="/assets/images/unlock_jenkins.png" /></li>
+<img src="/assets/images/unlock_jenkins.png" /></li>
   <li>Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. <code>ssh (yourID)@(Jenkins Public IP)</code>. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type <code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code> <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></li>
   <li>Create initial admin account and Install suggested plugins. Now, you can see Jenkins Dashboard.</li>
   <li>In main page of jenkins console, click <b>Hello World Build &amp; Deploy</b> link. Then you can see deployed pipeline.
-<img style="width: 700px" src="/assets/images/001.jenkins_pipeline.png" /></li>
+<img src="/assets/images/001.jenkins_pipeline.png" /></li>
 </ul>
 
 <h3 id="3-enter-grafana-web-page">3. Enter Grafana Web Page.</h3>
@@ -255,27 +255,27 @@ into the {body} of the default.hbs template -->
     <ul>
       <li>Check public IP address of Grafana VM. Type <code>ssh (your admin ID)@(Grafana Public IP)</code> on your cloud shell.</li>
     </ul>
-    <pre style="max-width: 815px;"><code>
+    <pre><code>
   sudo -s
   apt install sqlite3
   sqlite3 /var/lib/grafana/grafana.db
-  update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin'
+  <p style="white-space: normal;">update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin'</p>
     
 </code></pre>
   </li>
   <li>Enter Web page on your browser : http://(Grafana Public IP):3000</li>
   <li>Login : admin / admin ( Initialized in step “Reset admin password” )</li>
   <li>Now, we can connect to Grafana web page. Data source from azure monitor is already prepared for you.
-<img style="width: 700px" src="/assets/images/001.grafana_main.png" />
+<img src="/assets/images/001.grafana_main.png" />
     <ul>
       <li>
         <p>If you want to add Data source 
-<img style="width: 700px" src="/assets/images/001.add_datasource.png" />
+<img src="/assets/images/001.add_datasource.png" />
 To fill in the blacks, type “ac account list” on your azure cloud shell.<br /></p>
       </li>
       <li>
         <p>You can make dashboard  like below image.
-<img style="width: 700px" src="/assets/images/001.grafana_makedashboard.png" /></p>
+<img src="/assets/images/001.grafana_makedashboard.png" /></p>
       </li>
     </ul>
   </li>

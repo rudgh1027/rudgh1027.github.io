@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/architecture/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-06T20:13:31+09:00</updated>
+  <updated>2019-12-07T10:23:54+09:00</updated>
   <id>/tag/architecture/feed.xml</id>
 
   
@@ -62,13 +62,13 @@
 &lt;h2 id=&quot;use-case&quot;&gt;Use case&lt;/h2&gt;
 
 &lt;h3 id=&quot;1-faced-problem-case-1&quot;&gt;1. Faced Problem (Case 1)&lt;/h3&gt;
-&lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-overwhelmed.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-overwhelmed.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Service can fail, if requests from web app to datastore are increased.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;2-solution-case-2&quot;&gt;2. Solution (Case 2)&lt;/h3&gt;
-&lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;It could control writing speed to datastore using Service bus queue and Function app.&lt;/li&gt;
 &lt;/ul&gt;
@@ -87,9 +87,9 @@
 &lt;ul&gt;
   &lt;li&gt;It already wrote in github repository. &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
   &lt;li&gt;Before inserting data from &lt;strong&gt;service bus queue&lt;/strong&gt; to &lt;strong&gt;Table storage&lt;/strong&gt; using &lt;strong&gt;Azure function app&lt;/strong&gt;, I inserted 6000+ data to &lt;strong&gt;service bus queue&lt;/strong&gt; in advance. (It takes 30 minutes)
-&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_queueCount.png&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;/assets/images/loadLeveling_queueCount.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;And then, running &lt;strong&gt;Azure function app&lt;/strong&gt; to put data into &lt;strong&gt;Table storage&lt;/strong&gt; (It takes only a few seconds)
-&lt;img style=&quot;width: 700px&quot; src=&quot;/assets/images/loadLeveling_tableMetric.png&quot; /&gt;
+&lt;img src=&quot;/assets/images/loadLeveling_tableMetric.png&quot; /&gt;
     &lt;h2 id=&quot;lessen--learn&quot;&gt;Lessen &amp;amp; Learn&lt;/h2&gt;
   &lt;/li&gt;
   &lt;li&gt;Testing on Case 1 : Pass
@@ -113,7 +113,7 @@
   &lt;li&gt;Additional Example 1 &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn5&quot; id=&quot;fnref5&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/images/scalable-web-app.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/images/scalable-web-app.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;Requet backgroud process using queue and function, so that it preserves scalablity and availability.&lt;/p&gt;
@@ -121,7 +121,7 @@
   &lt;li&gt;
     &lt;p&gt;Additional Example 2 &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn6&quot; id=&quot;fnref5&quot;&gt;[6]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;img style=&quot;width: 700px&quot; src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/example-scenario/ai/media/mass-ingestion-newsfeeds-architecture.png&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;https://docs.microsoft.com/ko-kr/azure/architecture/example-scenario/ai/media/mass-ingestion-newsfeeds-architecture.png&quot; /&gt;&lt;/p&gt;
 
     &lt;ul&gt;
       &lt;li&gt;passing through several APIs sequentially&lt;/li&gt;
@@ -306,115 +306,6 @@
 
       
         <summary type="html">Intro Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Getting Started Service Bus Queue</title>
-      <link href="/welcome-to-getting-started-servicebusqueue" rel="alternate" type="text/html" title="Getting Started Service Bus Queue" />
-      <published>2019-10-02T19:00:00+09:00</published>
-      <updated>2019-10-02T19:00:00+09:00</updated>
-      <id>/welcome-to-getting-started-servicebusqueue</id>
-      <content type="html" xml:base="/welcome-to-getting-started-servicebusqueue">&lt;h3&gt;Create Service bus queue&lt;/h3&gt;
-&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
-&lt;li&gt;Go to azure portal - Run cloud shell&lt;small&gt;(If your azure subscription dosen't have storage account, you should create it first)&lt;/small&gt;&lt;/li&gt;
-&lt;li&gt;Define parameter file&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
-#vi exported
-
-#!/bin/bash
-###################
-Define 
-###################
-export rgnm=&quot;&quot;
-export location=&quot;&quot;
-export namespace=&quot;&quot;
-export queuename=&quot;&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul style=&quot;margin-bottom:0px !important;&quot;&gt;
-    &lt;li&gt;Create Resource&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre style=&quot;margin-top:10px !important;&quot;&gt;&lt;code&gt;
-# Create a resource group
-resourceGroupName=&quot;myResourceGroup&quot;
-
-az group create --name $resourceGroupName --location eastus
-
-# Create a Service Bus messaging namespace with a unique name
-namespaceName=myNameSpace$RANDOM
-az servicebus namespace create --resource-group $resourceGroupName --name $namespaceName --location eastus
-
-# Create a Service Bus queue
-az servicebus queue create --resource-group $resourceGroupName --namespace-name $namespaceName --name BasicQueue
-
-# Get the connection string for the namespace
-connectionString=$(az servicebus namespace authorization-rule keys list --resource-group $resourceGroupName --namespace-name $namespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
-&lt;/code&gt;&lt;/pre&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>gkarchy</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="architecture" />
-      
-        <category term="cloud" />
-      
-        <category term="azure" />
-      
-
-      
-        <summary type="html">Create Service bus queue Go to azure portal - Run cloud shell(If your azure subscription dosen't have storage account, you should create it first) Define parameter file #vi exported</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Welcome to Architecture</title>
-      <link href="/welcome-to-architecture" rel="alternate" type="text/html" title="Welcome to Architecture" />
-      <published>2019-09-29T19:00:00+09:00</published>
-      <updated>2019-09-29T19:00:00+09:00</updated>
-      <id>/welcome-to-architecture</id>
-      <content type="html" xml:base="/welcome-to-architecture">&lt;p&gt;This tab is about architecture patterns.&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>gkarchy</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="architecture" />
-      
-        <category term="welcome" />
-      
-
-      
-        <summary type="html">This tab is about architecture patterns.</summary>
       
 
       

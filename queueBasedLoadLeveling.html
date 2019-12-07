@@ -209,13 +209,13 @@ into the {body} of the default.hbs template -->
 <h2 id="use-case">Use case</h2>
 
 <h3 id="1-faced-problem-case-1">1. Faced Problem (Case 1)</h3>
-<p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-overwhelmed.png" /></p>
+<p><img src="https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-overwhelmed.png" /></p>
 <ul>
   <li>Service can fail, if requests from web app to datastore are increased.</li>
 </ul>
 
 <h3 id="2-solution-case-2">2. Solution (Case 2)</h3>
-<p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png" /></p>
+<p><img src="https://docs.microsoft.com/ko-kr/azure/architecture/patterns/_images/queue-based-load-leveling-function.png" /></p>
 <ul>
   <li>It could control writing speed to datastore using Service bus queue and Function app.</li>
 </ul>
@@ -234,9 +234,9 @@ into the {body} of the default.hbs template -->
 <ul>
   <li>It already wrote in github repository. <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></li>
   <li>Before inserting data from <strong>service bus queue</strong> to <strong>Table storage</strong> using <strong>Azure function app</strong>, I inserted 6000+ data to <strong>service bus queue</strong> in advance. (It takes 30 minutes)
-<img style="width: 700px" src="/assets/images/loadLeveling_queueCount.png" /></li>
+<img src="/assets/images/loadLeveling_queueCount.png" /></li>
   <li>And then, running <strong>Azure function app</strong> to put data into <strong>Table storage</strong> (It takes only a few seconds)
-<img style="width: 700px" src="/assets/images/loadLeveling_tableMetric.png" />
+<img src="/assets/images/loadLeveling_tableMetric.png" />
     <h2 id="lessen--learn">Lessen &amp; Learn</h2>
   </li>
   <li>Testing on Case 1 : Pass
@@ -260,7 +260,7 @@ into the {body} of the default.hbs template -->
   <li>Additional Example 1 <sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></li>
 </ul>
 
-<p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/images/scalable-web-app.png" /></p>
+<p><img src="https://docs.microsoft.com/ko-kr/azure/architecture/reference-architectures/app-service-web-app/images/scalable-web-app.png" /></p>
 <ul>
   <li>
     <p>Requet backgroud process using queue and function, so that it preserves scalablity and availability.</p>
@@ -268,7 +268,7 @@ into the {body} of the default.hbs template -->
   <li>
     <p>Additional Example 2 <sup class="footnote-ref"><a href="#fn6" id="fnref5">[6]</a></sup></p>
 
-    <p><img style="width: 700px" src="https://docs.microsoft.com/ko-kr/azure/architecture/example-scenario/ai/media/mass-ingestion-newsfeeds-architecture.png" /></p>
+    <p><img src="https://docs.microsoft.com/ko-kr/azure/architecture/example-scenario/ai/media/mass-ingestion-newsfeeds-architecture.png" /></p>
 
     <ul>
       <li>passing through several APIs sequentially</li>
