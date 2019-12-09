@@ -395,9 +395,9 @@ kubectl get nodes
 
 </code></pre>
 
-<h4 id="3-make-deployment-yaml-file">3) Make deployment yaml file</h4>
+<h3 id="3-make-deployment-yaml-file">3) Make deployment yaml file</h3>
 <pre><code>
-### vi azure-asp-net-web.yaml
+## vi azure-asp-net-web.yaml
 
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -412,7 +412,7 @@ spec:
     spec:
       containers:
         - name: azure-asp-net-web
-          image: acrfbfxvhmzjaele.azurecr.io/azure-asp-net-web:v1
+          image: acrfbfxvhmzjaele.azurecr.io/azure-asp-net-web:v1  ## replce with your ACR name
           ports:
             - containerPort: 80
 ---
@@ -426,12 +426,13 @@ spec:
       port: 8080
       targetPort: 80
   selector:
-    app: mssample-kub-app
+    app: azure-asp-net-web
   type: LoadBalancer
 
 </code></pre>
+<p>※ If you didn’t replace ACR name in yaml file, pod status would be ErrImagePull or ImagePullBackOff. You should replce it.</p>
 
-<h4 id="4-deploy-to-aks">4) Deploy to AKS</h4>
+<h3 id="4-deploy-to-aks">4) Deploy to AKS</h3>
 <pre><code>
 ## create Pod, deployment, and service
 kubectl create -f azure-asp-net-web.yaml
@@ -448,7 +449,40 @@ kubectl get deployment
   
 </code></pre>
 
-<h3 id="6-continueously-manage-by-jenkins-and-github--see-the-below-reference-8">6. Continueously manage by Jenkins and github : See the below reference <sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup></h3>
+<h3 id="5-connect-to-web-page">5) Connect to web page</h3>
+<pre><code>
+kubectl get service
+## ---Sample of result ---
+## NAME                  TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)          AGE
+## azure-asp-net-lb      LoadBalancer   10.0.169.133   52.186.27.141   8080:31455/TCP   90s
+## hello-world-service   LoadBalancer   10.0.69.140    13.92.82.195    80:30213/TCP     3h32m
+## kubernetes            ClusterIP      10.0.0.1       ((none))          443/TCP          3h46m
+
+</code></pre>
+
+<p>Type in bowser 52.186.27.141:8080    ( IP address will differ with my result, Type your own address )
+<img src="/assets/images/001.azure-cicd-asp-main.png" /></p>
+
+<h3 id="additional-kubectl-commands">Additional kubectl commands</h3>
+<pre><code>
+## delete deployment
+kubectl delete deployment ((deployment name))
+
+## delete service 
+kubectl delete service ((service name))
+
+
+## delete pod
+kubectl delete pod ((pod name))
+
+
+## check details
+kubectl describe (service|deployment|pod) (name)
+  
+</code></pre>
+
+<h2 id="6-continueously-manage-by-jenkins-and-github--see-the-below-reference">6. Continueously manage by Jenkins and github : See the below reference</h2>
+<p>reference : https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment</p>
 
 <hr class="footnotes-sep" />
 

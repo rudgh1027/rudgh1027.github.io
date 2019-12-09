@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/azure/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-07T10:23:54+09:00</updated>
+  <updated>2019-12-09T18:01:31+09:00</updated>
   <id>/tag/azure/feed.xml</id>
 
   
@@ -248,9 +248,9 @@ kubectl get nodes
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&quot;3-make-deployment-yaml-file&quot;&gt;3) Make deployment yaml file&lt;/h4&gt;
+&lt;h3 id=&quot;3-make-deployment-yaml-file&quot;&gt;3) Make deployment yaml file&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
-### vi azure-asp-net-web.yaml
+## vi azure-asp-net-web.yaml
 
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -265,7 +265,7 @@ spec:
     spec:
       containers:
         - name: azure-asp-net-web
-          image: acrfbfxvhmzjaele.azurecr.io/azure-asp-net-web:v1
+          image: acrfbfxvhmzjaele.azurecr.io/azure-asp-net-web:v1  ## replce with your ACR name
           ports:
             - containerPort: 80
 ---
@@ -279,12 +279,13 @@ spec:
       port: 8080
       targetPort: 80
   selector:
-    app: mssample-kub-app
+    app: azure-asp-net-web
   type: LoadBalancer
 
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;※ If you didn’t replace ACR name in yaml file, pod status would be ErrImagePull or ImagePullBackOff. You should replce it.&lt;/p&gt;
 
-&lt;h4 id=&quot;4-deploy-to-aks&quot;&gt;4) Deploy to AKS&lt;/h4&gt;
+&lt;h3 id=&quot;4-deploy-to-aks&quot;&gt;4) Deploy to AKS&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
 ## create Pod, deployment, and service
 kubectl create -f azure-asp-net-web.yaml
@@ -301,7 +302,40 @@ kubectl get deployment
   
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;6-continueously-manage-by-jenkins-and-github--see-the-below-reference-8&quot;&gt;6. Continueously manage by Jenkins and github : See the below reference &lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn8&quot; id=&quot;fnref8&quot;&gt;[8]&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;5-connect-to-web-page&quot;&gt;5) Connect to web page&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+kubectl get service
+## ---Sample of result ---
+## NAME                  TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)          AGE
+## azure-asp-net-lb      LoadBalancer   10.0.169.133   52.186.27.141   8080:31455/TCP   90s
+## hello-world-service   LoadBalancer   10.0.69.140    13.92.82.195    80:30213/TCP     3h32m
+## kubernetes            ClusterIP      10.0.0.1       ((none))          443/TCP          3h46m
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Type in bowser 52.186.27.141:8080    ( IP address will differ with my result, Type your own address )
+&lt;img src=&quot;/assets/images/001.azure-cicd-asp-main.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;additional-kubectl-commands&quot;&gt;Additional kubectl commands&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;
+## delete deployment
+kubectl delete deployment ((deployment name))
+
+## delete service 
+kubectl delete service ((service name))
+
+
+## delete pod
+kubectl delete pod ((pod name))
+
+
+## check details
+kubectl describe (service|deployment|pod) (name)
+  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;6-continueously-manage-by-jenkins-and-github--see-the-below-reference&quot;&gt;6. Continueously manage by Jenkins and github : See the below reference&lt;/h2&gt;
+&lt;p&gt;reference : https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment&lt;/p&gt;
 
 &lt;hr class=&quot;footnotes-sep&quot; /&gt;
 
