@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-12-09T18:01:31+09:00</updated><id>/</id><title type="html">GKArchy</title><subtitle>IT Service Technology Blog</subtitle><entry><title type="html">Take a trip</title><link href="/Take_a_trip" rel="alternate" type="text/html" title="Take a trip" /><published>2019-12-09T17:18:00+09:00</published><updated>2019-12-09T17:18:00+09:00</updated><id>/Take_a_trip</id><content type="html" xml:base="/Take_a_trip">&lt;p&gt;&lt;small&gt;Few years ago, I thought trip is waste of time and money. Maybe it was a repulsion of spending lots of money. Now, When I think about it, I should have worked hard to earn budget for a trip.&lt;/small&gt;&lt;/p&gt;
-
-&lt;p&gt;Anyway, going to other country always gives me special things. This thought came to my mind when I went to Nepal for volumteer. We met local people, held a worship, donated, and prey for them. They had a problem with India, because Goverment of India force Nepalee to have one and only one religion, Hindu. Nevertheless, they welcomed us and serve local foods. They filled in my heart more than what we gave to them.&lt;/p&gt;</content><author><name>gkarchy</name></author><category term="life" /><category term="trip" /><category term="overseas" /><summary type="html">Few years ago, I thought trip is waste of time and money. Maybe it was a repulsion of spending lots of money. Now, When I think about it, I should have worked hard to earn budget for a trip.</summary></entry><entry><title type="html">Deploy Dotnet MVC web</title><link href="/dotnetMVCDeploy" rel="alternate" type="text/html" title="Deploy Dotnet MVC web" /><published>2019-11-22T19:18:00+09:00</published><updated>2019-11-22T19:18:00+09:00</updated><id>/dotnetMVCDeploy</id><content type="html" xml:base="/dotnetMVCDeploy">&lt;h2 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-12-10T19:01:29+09:00</updated><id>/</id><title type="html">GKArchy</title><subtitle>IT Service Technology Blog</subtitle><entry><title type="html">Deploy Dotnet MVC web</title><link href="/dotnetMVCDeploy" rel="alternate" type="text/html" title="Deploy Dotnet MVC web" /><published>2019-11-22T19:18:00+09:00</published><updated>2019-11-22T19:18:00+09:00</updated><id>/dotnetMVCDeploy</id><content type="html" xml:base="/dotnetMVCDeploy">&lt;h2 id=&quot;setting-environment&quot;&gt;Setting environment&lt;/h2&gt;
 &lt;h3 id=&quot;1-install-dotnet-core-sdk&quot;&gt;1. Install Dotnet core SDK&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current&quot;&gt;https://dotnet.microsoft.com/download/linux-package-manager/sdk-current&lt;/a&gt;
 &lt;br /&gt;Find OS Type and version matches your environment.
@@ -103,12 +101,12 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /app
 
 ## copy csproj and restore as distinct layers
-COPY *.sln .
-COPY test/*.csproj ./test/
+#  COPY *.sln .
+COPY *.csproj ./test/
 RUN dotnet restore
 
 ## copy everything else and build app
-COPY test/. ./test/
+COPY . ./test/
 WORKDIR /app/test
 RUN dotnet publish -c Release -o out
 
@@ -321,7 +319,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
   &lt;li&gt;Install jq library to ubuntu server in order to use az cli esaily&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;
-apt install jq
+apt install jq -y
 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -379,7 +377,7 @@ kubectl get nodes
 
 &lt;h3 id=&quot;3-make-deployment-yaml-file&quot;&gt;3) Make deployment yaml file&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;
-## vi azure-asp-net-web.yaml
+## vi ~/test/azure-asp-net-web.yaml
 
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -1082,4 +1080,6 @@ dotnet run
     &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;/section&gt;</content><author><name>gkarchy</name></author><category term="architecture" /><summary type="html">Intro Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.</summary></entry><entry><title type="html">Welcome to System Engineer</title><link href="/welcome-to-systemengineer" rel="alternate" type="text/html" title="Welcome to System Engineer" /><published>2019-09-29T19:18:00+09:00</published><updated>2019-09-29T19:18:00+09:00</updated><id>/welcome-to-systemengineer</id><content type="html" xml:base="/welcome-to-systemengineer">&lt;p&gt;This tab is about my work as system engineer.&lt;/p&gt;</content><author><name>gkarchy</name></author><category term="system-engineer" /><category term="welcome" /><summary type="html">This tab is about my work as system engineer.</summary></entry></feed>
+&lt;/section&gt;</content><author><name>gkarchy</name></author><category term="architecture" /><summary type="html">Intro Message queue provides &quot;Asynchronous communication protocol&quot;. That means it is not necessary for sender and receiver to be connected at the same time. It can make application scalable and flexible.</summary></entry><entry><title type="html">Welcome to System Engineer</title><link href="/welcome-to-systemengineer" rel="alternate" type="text/html" title="Welcome to System Engineer" /><published>2019-09-29T19:18:00+09:00</published><updated>2019-09-29T19:18:00+09:00</updated><id>/welcome-to-systemengineer</id><content type="html" xml:base="/welcome-to-systemengineer">&lt;p&gt;This tab is about my work as system engineer.&lt;/p&gt;</content><author><name>gkarchy</name></author><category term="system-engineer" /><category term="welcome" /><summary type="html">This tab is about my work as system engineer.</summary></entry><entry><title type="html">Take a trip</title><link href="/Take_a_trip" rel="alternate" type="text/html" title="Take a trip" /><published>2019-09-09T17:18:00+09:00</published><updated>2019-09-09T17:18:00+09:00</updated><id>/Take_a_trip</id><content type="html" xml:base="/Take_a_trip">&lt;p&gt;&lt;small&gt;Few years ago, I thought trip is waste of time and money. Maybe it was a repulsion of spending lots of money. Now, When I think about it, I should have worked hard to earn budget for a trip.&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;Anyway, going to other country always gives me special things. This thought came to my mind when I went to Nepal for volumteer. We met local people, held a worship, donated, and prey for them. They had a problem with India, because Goverment of India force Nepalee to have one and only one religion, Hindu. Nevertheless, they welcomed us and serve local foods. They filled in my heart more than what we gave to them.&lt;/p&gt;</content><author><name>gkarchy</name></author><category term="life" /><category term="trip" /><category term="overseas" /><summary type="html">Few years ago, I thought trip is waste of time and money. Maybe it was a repulsion of spending lots of money. Now, When I think about it, I should have worked hard to earn budget for a trip.</summary></entry></feed>

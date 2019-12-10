@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/systemengineer/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-12-09T18:01:31+09:00</updated>
+  <updated>2019-12-10T19:01:29+09:00</updated>
   <id>/tag/systemengineer/feed.xml</id>
 
   
@@ -140,12 +140,12 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /app
 
 ## copy csproj and restore as distinct layers
-COPY *.sln .
-COPY test/*.csproj ./test/
+#  COPY *.sln .
+COPY *.csproj ./test/
 RUN dotnet restore
 
 ## copy everything else and build app
-COPY test/. ./test/
+COPY . ./test/
 WORKDIR /app/test
 RUN dotnet publish -c Release -o out
 

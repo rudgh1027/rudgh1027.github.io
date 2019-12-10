@@ -339,7 +339,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
   <li>Install jq library to ubuntu server in order to use az cli esaily</li>
 </ul>
 <pre><code>
-apt install jq
+apt install jq -y
 
 </code></pre>
 
@@ -397,7 +397,7 @@ kubectl get nodes
 
 <h3 id="3-make-deployment-yaml-file">3) Make deployment yaml file</h3>
 <pre><code>
-## vi azure-asp-net-web.yaml
+## vi ~/test/azure-asp-net-web.yaml
 
 apiVersion: apps/v1beta1
 kind: Deployment
