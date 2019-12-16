@@ -214,48 +214,40 @@ into the {body} of the default.hbs template -->
   <li>
     <p>Find the supported Kubernetes versions for your deployment region : <code>az aks get-versions -l <region> --query "orchestrators[?default!=null].orchestratorVersion" -o tsv&lt;/code&gt;</region></code></p>
   </li>
-  <li>From now, you can fill on the blanks.</li>
-</ul>
-
-<p><img src="/assets/images/001.deploymain.png" /></p>
-
-<ol>
-  <li>Sp Clint Id : “appId” of previous step</li>
-  <li>Sp Clint Secret : ““password” of previous step</li>
-  <li>Linux Admin Username &amp; Password : Now, you should define.</li>
-  <li>Linux SSH Public Key : We already make it in previous step. Type the command on cloud shell <code>cat ~/.ssh/id_rsa.pub</code></li>
-  <li>Kubernetes Version : Type as you know.</li>
-</ol>
-
-<ul>
+  <li>From now, you can fill on the blanks.<br />
+<img src="/assets/images/001.deploymain.png" />
+    <ol>
+      <li>Sp Clint Id : “appId” of previous step</li>
+      <li>Sp Clint Secret : ““password” of previous step</li>
+      <li>Linux Admin Username &amp; Password : Now, you should define.</li>
+      <li>Linux SSH Public Key : We already make it in previous step. Type the command on cloud shell <code>cat ~/.ssh/id_rsa.pub</code></li>
+      <li>Kubernetes Version : Type as you know.</li>
+    </ol>
+  </li>
   <li>Waiting for 20-30 minute.</li>
 </ul>
 
 <h3 id="2-enter-jenkins-web-page">2. Enter Jenkins Web Page.</h3>
 <ul>
   <li>Click Jenkins server on your resource tab in azure portal. And copy public IP Address of jenkins server.</li>
-  <li>Type http://(public ip address) on your browser. Than you can see the page like below.</li>
-</ul>
-
-<p><img src="/assets/images/001.jenkins_default.png" /></p>
-
-<blockquote>
-  <p>You need to use ssh cli command. When you use linux or MAC environment, you just type command <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code> sign in your browser. If you use windows environment, you need to install 3th-party ssh tool.</p>
-  <ul>
-    <li>In the lab, I’m going to use git bash to establish ssh connection.
-Open git bash terminal - type <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code></li>
-    <li>Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.</li>
-  </ul>
-</blockquote>
-
-<p><img src="/assets/images/unlock_jenkins.png" /></p>
-<ul>
+  <li>Type http://(public ip address) on your browser. Than you can see the page like below.
+<img src="/assets/images/001.jenkins_default.png" />
+    <blockquote>
+      <p>You need to use ssh cli command. When you use linux or MAC environment, you just type command <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code> sign in your browser. If you use windows environment, you need to install 3th-party ssh tool.</p>
+    </blockquote>
+  </li>
+  <li>In the lab, I’m going to use git bash to establish ssh connection.
+    <blockquote>
+      <p>Open git bash terminal - type <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code></p>
+    </blockquote>
+  </li>
+  <li>Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.
+<img src="/assets/images/unlock_jenkins.png" /></li>
   <li>Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. <code>ssh (yourID)@(Jenkins Public IP)</code>. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type <code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code> <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></li>
   <li>Create initial admin account and Install suggested plugins. Now, you can see Jenkins Dashboard.</li>
-  <li>In main page of jenkins console, click <b>Hello World Build &amp; Deploy</b> link. Then you can see deployed pipeline.</li>
+  <li>In main page of jenkins console, click <b>Hello World Build &amp; Deploy</b> link. Then you can see deployed pipeline.
+<img src="/assets/images/001.jenkins_pipeline.png" /></li>
 </ul>
-
-<p><img src="/assets/images/001.jenkins_pipeline.png" /></p>
 
 <h3 id="3-enter-grafana-web-page">3. Enter Grafana Web Page.</h3>
 <ul>
@@ -263,36 +255,31 @@ Open git bash terminal - type <code>ssh -L 127.0.0.1:8080:localhost:8080 (your u
     <ul>
       <li>Check public IP address of Grafana VM. Type <code>ssh (your admin ID)@(Grafana Public IP)</code> on your cloud shell.</li>
     </ul>
-  </li>
-</ul>
-<pre><code>
-    sudo -s
-    apt install sqlite3
-    sqlite3 /var/lib/grafana/grafana.db
-    update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin'
+    <pre><code>
+  sudo -s
+  apt install sqlite3
+  sqlite3 /var/lib/grafana/grafana.db
+  <p style="white-space: normal;">update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin'</p>
     
 </code></pre>
-<ul>
+  </li>
   <li>Enter Web page on your browser : http://(Grafana Public IP):3000</li>
   <li>Login : admin / admin ( Initialized in step “Reset admin password” )</li>
-  <li>Now, we can connect to Grafana web page. Data source from azure monitor is already prepared for you.</li>
+  <li>Now, we can connect to Grafana web page. Data source from azure monitor is already prepared for you.
+<img src="/assets/images/001.grafana_main.png" />
+    <ul>
+      <li>
+        <p>If you want to add Data source 
+<img src="/assets/images/001.add_datasource_new.png" />
+To fill in the blacks, type “ac account list” on your azure cloud shell.<br /></p>
+      </li>
+      <li>
+        <p>You can make dashboard  like below image.
+<img src="/assets/images/001.grafana_makedashboard.png" /></p>
+      </li>
+    </ul>
+  </li>
 </ul>
-
-<p><img src="/assets/images/001.grafana_main.png" /></p>
-
-<ul>
-  <li>If you want to add Data source</li>
-</ul>
-
-<p><img src="/assets/images/001.add_datasource.png" /></p>
-
-<p>-To fill in the blacks, type “ac account list” on your azure cloud shell.<br /></p>
-
-<ul>
-  <li>You can make dashboard  like below image.</li>
-</ul>
-
-<p><img src="/assets/images/001.grafana_makedashboard.png" /></p>
 
 <h3 id="4-make-container-image-in-acr">4. Make container image in ACR</h3>
 
@@ -494,8 +481,95 @@ kubectl describe (service|deployment|pod) (name)
   
 </code></pre>
 
-<h2 id="6-continueously-manage-by-jenkins-and-github--see-the-below-reference">6. Continueously manage by Jenkins and github : See the below reference</h2>
-<p>reference : https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment</p>
+<h2 id="6-continueously-manage-by-jenkins-and-github9">6. Continueously manage by Jenkins and github<sup class="footnote-ref"><a href="#fn9" id="fnref9">[9]</a></sup></h2>
+
+<h3 id="1-create-a-jenkins-environment-variable">1) Create a Jenkins Environment Variable</h3>
+<ul>
+  <li>Click Manage Jenkins - Configure System
+<img src="/assets/images/001.jenkins_setting.png" /></li>
+  <li>And then, make a variable for ACR login. (You can see ACR name by typing <code>az acr list --resource-group ((your RG name)) | jq -r ".[].name"</code>)
+<img src="/assets/images/001.create-a-jenkins-environment-variable.png" /></li>
+</ul>
+
+<h3 id="2-make-a-new-project">2) Make a new project</h3>
+<ul>
+  <li>Since, creating service principal(SP) in Azure and applying ACR credential in Jenkins are aleady done by intial deployment script. So next step is making a new project.</li>
+</ul>
+
+<p>-Click new item on the left side of jenkins web page. Enter an item name as “azure-asp-net-web” and select Freestyle Project.
+<img src="/assets/images/001.new_item.png" /></p>
+
+<ul>
+  <li>In the general tab, Click github project and type git repository. I’ll use my sample repository, <code>https://github.com/rudgh1027/azure-asp-net-web.git</code>. You can use my repository(but, you cannot edit it. It means you cannot test CICD process by webhook.) or use your own repository. Whether folk, clone my repository or push your own reposity by yourself, it doesn’t metter.</li>
+  <li>
+    <p>In the source code management tab, select git and repository URL.
+<img src="/assets/images/001.new_project_setting1.png" /></p>
+  </li>
+  <li>In the Build Triggers section, select GitHub hook trigger for GITscm polling</li>
+  <li>In the Build Environment, select Use secret texts or files</li>
+  <li>
+    <p>In the Bindings, select Add &gt; Username and password (Look for this page’s 1. Make resource from predefined template.)
+<img src="/assets/images/001.new_project_setting2.png" /></p>
+  </li>
+  <li>Add a Build Step of type Execute shell. Type below test.</li>
+</ul>
+<pre><code>
+# Build new image and push to ACR.
+WEB_IMAGE_NAME="${ACR_LOGINSERVER}/azure-asp-net-web:kube${BUILD_NUMBER}"
+docker build -t $WEB_IMAGE_NAME ./test
+docker login ${ACR_LOGINSERVER} -u ${ACR_ID} -p ${ACR_PASSWORD}
+docker push $WEB_IMAGE_NAME
+
+</code></pre>
+
+<ul>
+  <li>
+    <p>Add a Build Step again and select aks deployment. Fill in the blacks like below.
+<img src="/assets/images/001.new_project_setting3.png" /></p>
+  </li>
+  <li>
+    <p>Deployment test</p>
+  </li>
+</ul>
+<pre><code>	
+vi ~/test/test/Views/Home/Index.cshtml
+## Type &lt;h3 class="display=4"&gt;I hope to help you&lt;/h3&gt;
+
+</code></pre>
+<p><img src="/assets/images/001.edit_asp_web_index.png" /></p>
+
+<pre><code>	
+vi ~/test/azure-asp-net-web.yaml
+## edit deployment tag 
+
+</code></pre>
+<p><img src="/assets/images/001.edit_asp_web_tag.png" /></p>
+
+<ul>
+  <li>Push into github.</li>
+</ul>
+<pre><code>	
+cd ~/test
+git add .
+git commit -m "edit home index page“
+git push –u origin master
+
+</code></pre>
+
+<ul>
+  <li>Return to Jenkins web page. Run Build Now. Then, you can see below page.
+<img src="/assets/images/001.manual_deploy_result.png" /></li>
+</ul>
+
+<h3 id="3-add-webhook">3) Add webhook</h3>
+
+<ul>
+  <li>Browse to your GitHub repository in a web browser. Select Settings, then select Webhooks.</li>
+  <li>Add webhook. For the Payload URL, enter http://&lt;publicIp:8080&gt;/github-webhook/</li>
+  <li>In azure cloud shell run <code>az vm open-port --resource-group ((your resource group name)) --name jenkins --port 8080</code></li>
+  <li>Edit your git source, then it will deploy immediatly.
+  <img src="/assets/images/001.manual_deploy_result2.png" /></li>
+</ul>
 
 <hr class="footnotes-sep" />
 
@@ -548,6 +622,12 @@ kubectl describe (service|deployment|pod) (name)
                 <small>https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment</small>
             </a> 
             <a href="#fnref8" class="footnote-backref">↩︎</a>
+    </li>
+    <li id="fn9" class="footnote-item">
+            reference: <a href="https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment">
+                <small>https://docs.microsoft.com/en-us/azure/aks/jenkins-continuous-deployment</small>
+            </a> 
+            <a href="#fnref9" class="footnote-backref">↩︎</a>
     </li>
 </ol>
 </section>
