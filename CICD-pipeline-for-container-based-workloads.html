@@ -214,40 +214,48 @@ into the {body} of the default.hbs template -->
   <li>
     <p>Find the supported Kubernetes versions for your deployment region : <code>az aks get-versions -l <region> --query "orchestrators[?default!=null].orchestratorVersion" -o tsv&lt;/code&gt;</region></code></p>
   </li>
-  <li>From now, you can fill on the blanks.<br />
-<img src="/assets/images/001.deploymain.png" />
-    <ol>
-      <li>Sp Clint Id : “appId” of previous step</li>
-      <li>Sp Clint Secret : ““password” of previous step</li>
-      <li>Linux Admin Username &amp; Password : Now, you should define.</li>
-      <li>Linux SSH Public Key : We already make it in previous step. Type the command on cloud shell <code>cat ~/.ssh/id_rsa.pub</code></li>
-      <li>Kubernetes Version : Type as you know.</li>
-    </ol>
-  </li>
+  <li>From now, you can fill on the blanks.</li>
+</ul>
+
+<p><img src="/assets/images/001.deploymain.png" /></p>
+
+<ol>
+  <li>Sp Clint Id : “appId” of previous step</li>
+  <li>Sp Clint Secret : ““password” of previous step</li>
+  <li>Linux Admin Username &amp; Password : Now, you should define.</li>
+  <li>Linux SSH Public Key : We already make it in previous step. Type the command on cloud shell <code>cat ~/.ssh/id_rsa.pub</code></li>
+  <li>Kubernetes Version : Type as you know.</li>
+</ol>
+
+<ul>
   <li>Waiting for 20-30 minute.</li>
 </ul>
 
 <h3 id="2-enter-jenkins-web-page">2. Enter Jenkins Web Page.</h3>
 <ul>
   <li>Click Jenkins server on your resource tab in azure portal. And copy public IP Address of jenkins server.</li>
-  <li>Type http://(public ip address) on your browser. Than you can see the page like below.
-<img src="/assets/images/001.jenkins_default.png" />
-    <blockquote>
-      <p>You need to use ssh cli command. When you use linux or MAC environment, you just type command <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code> sign in your browser. If you use windows environment, you need to install 3th-party ssh tool.</p>
-    </blockquote>
-  </li>
-  <li>In the lab, I’m going to use git bash to establish ssh connection.
-    <blockquote>
-      <p>Open git bash terminal - type <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code></p>
-    </blockquote>
-  </li>
-  <li>Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.
-<img src="/assets/images/unlock_jenkins.png" /></li>
+  <li>Type http://(public ip address) on your browser. Than you can see the page like below.</li>
+</ul>
+
+<p><img src="/assets/images/001.jenkins_default.png" /></p>
+
+<blockquote>
+  <p>You need to use ssh cli command. When you use linux or MAC environment, you just type command <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code> sign in your browser. If you use windows environment, you need to install 3th-party ssh tool.</p>
+  <ul>
+    <li>In the lab, I’m going to use git bash to establish ssh connection.
+Open git bash terminal - type <code>ssh -L 127.0.0.1:8080:localhost:8080 (your username)@jenkinsg.......</code></li>
+    <li>Now you can connect web console page through forwarded local port. Type http://localhost:8080 on your browser.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/images/unlock_jenkins.png" /></p>
+<ul>
   <li>Then, you will see below page. To unlock jenkins server, Connect to jenkins server on azure cloud shell. <code>ssh (yourID)@(Jenkins Public IP)</code>. Because you generate ssh key in yuor cloud shell environment, you don’t have to type your password. In order to get password for unlocking jenkins web console, type <code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code> <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></li>
   <li>Create initial admin account and Install suggested plugins. Now, you can see Jenkins Dashboard.</li>
-  <li>In main page of jenkins console, click <b>Hello World Build &amp; Deploy</b> link. Then you can see deployed pipeline.
-<img src="/assets/images/001.jenkins_pipeline.png" /></li>
+  <li>In main page of jenkins console, click <b>Hello World Build &amp; Deploy</b> link. Then you can see deployed pipeline.</li>
 </ul>
+
+<p><img src="/assets/images/001.jenkins_pipeline.png" /></p>
 
 <h3 id="3-enter-grafana-web-page">3. Enter Grafana Web Page.</h3>
 <ul>
@@ -255,31 +263,36 @@ into the {body} of the default.hbs template -->
     <ul>
       <li>Check public IP address of Grafana VM. Type <code>ssh (your admin ID)@(Grafana Public IP)</code> on your cloud shell.</li>
     </ul>
-    <pre><code>
-  sudo -s
-  apt install sqlite3
-  sqlite3 /var/lib/grafana/grafana.db
-  <p style="white-space: normal;">update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin'</p>
-    
-</code></pre>
-  </li>
-  <li>Enter Web page on your browser : http://(Grafana Public IP):3000</li>
-  <li>Login : admin / admin ( Initialized in step “Reset admin password” )</li>
-  <li>Now, we can connect to Grafana web page. Data source from azure monitor is already prepared for you.
-<img src="/assets/images/001.grafana_main.png" />
-    <ul>
-      <li>
-        <p>If you want to add Data source 
-<img src="/assets/images/001.add_datasource.png" />
-To fill in the blacks, type “ac account list” on your azure cloud shell.<br /></p>
-      </li>
-      <li>
-        <p>You can make dashboard  like below image.
-<img src="/assets/images/001.grafana_makedashboard.png" /></p>
-      </li>
-    </ul>
   </li>
 </ul>
+<pre><code>
+    sudo -s
+    apt install sqlite3
+    sqlite3 /var/lib/grafana/grafana.db
+    update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin'
+    
+</code></pre>
+<ul>
+  <li>Enter Web page on your browser : http://(Grafana Public IP):3000</li>
+  <li>Login : admin / admin ( Initialized in step “Reset admin password” )</li>
+  <li>Now, we can connect to Grafana web page. Data source from azure monitor is already prepared for you.</li>
+</ul>
+
+<p><img src="/assets/images/001.grafana_main.png" /></p>
+
+<ul>
+  <li>If you want to add Data source</li>
+</ul>
+
+<p><img src="/assets/images/001.add_datasource.png" /></p>
+
+<p>-To fill in the blacks, type “ac account list” on your azure cloud shell.<br /></p>
+
+<ul>
+  <li>You can make dashboard  like below image.</li>
+</ul>
+
+<p><img src="/assets/images/001.grafana_makedashboard.png" /></p>
 
 <h3 id="4-make-container-image-in-acr">4. Make container image in ACR</h3>
 
